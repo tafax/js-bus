@@ -1,0 +1,23 @@
+{
+  "name": "js-bus",
+  "description": "jsBus is a JavaScript library to handle a simple, pluggable and extendable message bus.",
+  "main": "index.js",
+  "authors": [
+    "Matteo Tafani Alunno"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "typescript",
+    "message",
+    "command",
+    "bus"
+  ],
+  "homepage": "https://bitbucket.org/tafax/js-bus/overview",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

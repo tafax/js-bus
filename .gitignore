@@ -1,0 +1,9 @@
+
+# Project
+.idea
+
+# Node environment
+node_modules
+
+# Release
+dist
