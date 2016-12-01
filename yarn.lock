@@ -6,6 +6,10 @@
   version "3.0.35"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.0.35.tgz#e6e2d375a7b7a0a22f155ce74eb28d0da303740c"
 
+"@types/core-js@^0.9.34":
+  version "0.9.34"
+  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-0.9.34.tgz#72c521d8e59fdaa8b65f76db71fa53c82c7c21c5"
+
 "@types/fs-extra@0.0.33":
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-0.0.33.tgz#a8719c417b080c012d3497b28e228ac09745fdf2"
@@ -36,6 +40,10 @@
   version "2.2.33"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.33.tgz#d79a0061ec270379f4d9e225f4096fb436669def"
 
+"@types/mockery@^1.4.29":
+  version "1.4.29"
+  resolved "https://registry.yarnpkg.com/@types/mockery/-/mockery-1.4.29.tgz#9ba22df37f07e3780fff8531d1a38e633f9457a5"
+
 "@types/node@*", "@types/node@^6.0.48":
   version "6.0.48"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.48.tgz#86ccc15f66b73cbbc5eb3483398936c585122b3c"
@@ -50,7 +58,13 @@
   version "8.1.30"
   resolved "https://registry.yarnpkg.com/@types/should/-/should-8.1.30.tgz#e6b4f3ca4fb0799f6ce3303f3a8c003df6585aa3"
 
-"@types/sinon@^1.16.32":
+"@types/sinon-as-promised@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@types/sinon-as-promised/-/sinon-as-promised-4.0.5.tgz#130b6cabfc31eb5bc0dbabc48a336eb08a5344fd"
+  dependencies:
+    "@types/sinon" "*"
+
+"@types/sinon@*", "@types/sinon@^1.16.32":
   version "1.16.32"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-1.16.32.tgz#b3246844902d7cb33f376b369b176a65a144af7e"
 
@@ -488,6 +502,10 @@ conventional-commits-parser@^1.0.0:
 convert-source-map@1.X, convert-source-map@^1.1.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.3.0.tgz#e9f3e9c6e2728efc2676696a70eb382f73106a67"
+
+core-js@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
 core-util-is@~1.0.0:
   version "1.0.2"
@@ -931,6 +949,16 @@ glob@^4.3.1:
 glob@^5.0.3, glob@~5.0.0:
   version "5.0.15"
   resolved "https://registry.yarnpkg.com/glob/-/glob-5.0.15.tgz#1bc936b9e02f4a603fcc222ecf7633d30b8b93b1"
+  dependencies:
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "2 || 3"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
+glob@^6.0.1:
+  version "6.0.4"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-6.0.4.tgz#0f08860f6a155127b2fadd4f9ce24b1aab6e4d22"
   dependencies:
     inflight "^1.0.4"
     inherits "2"
@@ -1870,6 +1898,10 @@ mocha@^3.1.2:
     mkdirp "0.5.1"
     supports-color "3.1.2"
 
+mockery@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/mockery/-/mockery-2.0.0.tgz#0569a11a1848461fdc347cf8cca2df2f3129bc03"
+
 modify-values@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.0.tgz#e2b6cdeb9ce19f99317a53722f3dbf5df5eaaab2"
@@ -2193,6 +2225,10 @@ redent@^1.0.0:
   dependencies:
     indent-string "^2.1.0"
     strip-indent "^1.0.1"
+
+reflect-metadata@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.8.tgz#72426d570b60776e3688968bd5ab9537a15cecf6"
 
 regex-cache@^0.4.2:
   version "0.4.3"
@@ -2609,6 +2645,13 @@ ts-node@^1.7.0:
     v8flags "^2.0.11"
     xtend "^4.0.0"
     yn "^1.2.0"
+
+ts-npm-lint@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ts-npm-lint/-/ts-npm-lint-0.1.0.tgz#17671ec1b142ed741751b6d5a1808ed8ba248718"
+  dependencies:
+    chalk "^1.1.1"
+    glob "^6.0.1"
 
 tsconfig@^5.0.2:
   version "5.0.3"

@@ -1,10 +1,12 @@
-
+/**
+ * Describes an interface to build an handler resolver
+ * on top of the messages that it receives as parameter.
+ */
 export interface MessageHandlerResolverInterface {
-
   /**
-   * Resolve the message handler callable for the given message.
-   * @param {any} message
-   * @return Function
+   * Gets the handler for a message.
+   * @param {any} message The message to use to resolve the handler.
+   * @return {Function} The handler function to handle the message.
    */
-    resolve(message: any);
+    getHandler(message: any): Function;
 }

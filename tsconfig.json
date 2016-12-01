@@ -8,6 +8,9 @@
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": false
+    "suppressImplicitAnyIndexErrors": false,
+    "declaration": true,
+    "outDir": "lib",
+    "lib": ["es5"]
   }
 }
