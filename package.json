@@ -2,9 +2,14 @@
   "name": "js-bus",
   "version": "0.0.1",
   "description": "jsBus is a JavaScript library to handle a simple, pluggable and extendable message bus.",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "typings": "lib/index",
+  "files": [
+    "lib/"
+  ],
   "scripts": {
-    "test": "mocha --compilers ts:ts-node/register test/**/*.ts"
+    "test": "mocha --compilers ts:ts-node/register --recursive test",
+    "package:lint": "ts-npm-lint"
   },
   "repository": {
     "type": "git",
@@ -20,14 +25,19 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/tafax/js-bus#readme",
   "dependencies": {
-    "bluebird": "^3.4.6"
+    "bluebird": "^3.4.6",
+    "core-js": "^2.4.1",
+    "reflect-metadata": "^0.1.8"
   },
   "devDependencies": {
     "@types/bluebird": "^3.0.35",
+    "@types/core-js": "^0.9.34",
     "@types/mocha": "^2.2.33",
+    "@types/mockery": "^1.4.29",
     "@types/node": "^6.0.48",
     "@types/should": "^8.1.30",
     "@types/sinon": "^1.16.32",
+    "@types/sinon-as-promised": "^4.0.5",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.5.0",
     "gulp-clean": "^0.3.2",
@@ -38,11 +48,13 @@
     "merge2": "^1.0.2",
     "mocha": "^3.1.2",
     "mocha-typescript": "^1.0.11",
+    "mockery": "^2.0.0",
     "should": "^11.1.1",
     "should-sinon": "^0.0.5",
     "sinon": "^1.17.6",
     "sinon-as-promised": "^4.0.2",
     "ts-node": "^1.7.0",
+    "ts-npm-lint": "^0.1.0",
     "tslint": "^4.0.0",
     "typedoc": "^0.5.1",
     "typescript": "^2.0.10"

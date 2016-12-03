@@ -8,10 +8,10 @@ var bump = require('gulp-bump');
 var clean = require('gulp-clean');
 var typedoc = require("gulp-typedoc");
 
-var tsProject = ts.createProject('tsconfig.json', { declaration: true });
+var tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('clean', function() {
-  return gulp.src('./dist', { read: false })
+  return gulp.src('./lib', { read: false })
     .pipe(clean());
 });
 
@@ -22,10 +22,10 @@ gulp.task('compile', function() {
 
   return merge([
     tsResult.dts
-      .pipe(gulp.dest('dist')),
+      .pipe(gulp.dest('./lib')),
     tsResult.js
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('dist'))
+      .pipe(gulp.dest('./lib'))
   ]);
 });
 
@@ -60,7 +60,7 @@ gulp.task('typedoc', function() {
     .src('./src/**/*.ts')
     .pipe(typedoc({
       module: 'commonjs',
-      target: 'es5',
+      target: 'es6',
       includeDeclarations: true,
 
       out: './doc',
