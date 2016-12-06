@@ -1,6 +1,6 @@
 
 import 'reflect-metadata';
-import { MessageHandler, messageHandlerMetadataKey } from '../../src/Handler/Metadata/Decorators/MessageHandlerDecorator';
+import { MessageHandler, messageHandlerMetadataKey } from '../../../src/Handler/Metadata/Decorators/MessageHandlerDecorator';
 
 import { suite, test } from 'mocha-typescript';
 import 'should';
@@ -8,8 +8,8 @@ import * as sinon from 'sinon';
 import { SinonStub } from 'sinon';
 import 'sinon-as-promised';
 
-import { MessageBusAllowMiddleware } from '../../src/Bus/MessageBusAllowMiddleware';
-import {MessageBusMiddlewareInterface} from "../../src/Middleware/MessageBusMiddlewareInterface";
+import { MessageBusAllowMiddleware } from '../../../src/Bus/MessageBusAllowMiddleware';
+import { MessageBusMiddlewareInterface } from '../../../src/Middleware/MessageBusMiddlewareInterface';
 
 describe('MessageBusAllowMiddlewareTest', () => {
 

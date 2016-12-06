@@ -8,7 +8,9 @@
     "lib/"
   ],
   "scripts": {
-    "test": "mocha --compilers ts:ts-node/register --recursive test",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "mocha --compilers ts:ts-node/register --recursive test/unit",
+    "test:integration": "mocha --compilers ts:ts-node/register --recursive test/integration",
     "package:lint": "ts-npm-lint"
   },
   "repository": {
@@ -57,6 +59,8 @@
     "ts-npm-lint": "^0.1.0",
     "tslint": "^4.0.0",
     "typedoc": "^0.5.1",
-    "typescript": "^2.0.10"
+    "typescript": "^2.0.10",
+    "webpack": "^1.13.3",
+    "webpack-merge": "^1.0.2"
   }
 }

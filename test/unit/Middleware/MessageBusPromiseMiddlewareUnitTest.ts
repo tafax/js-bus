@@ -6,7 +6,7 @@ import { SinonStub } from 'sinon';
 import 'sinon-as-promised';
 import * as Promise from 'bluebird';
 
-import { MessageBusPromiseMiddleware } from '../../src/Middleware/MessageBusPromiseMiddleware';
+import { MessageBusPromiseMiddleware } from '../../../src/Middleware/MessageBusPromiseMiddleware';
 
 @suite class MessageBusPromiseMiddlewareUnitTest {
 

@@ -6,8 +6,8 @@ import { SinonStub } from 'sinon';
 import 'sinon-as-promised';
 import * as Promise from 'bluebird';
 
-import { DelegatesToMessageHandlerMiddleware } from '../../src/Handler/DelegatesToMessageHandlerMiddleware';
-import { MessageHandlerResolverInterface } from '../../src/Handler/Resolver/MessageHandlerResolverInterface';
+import { DelegatesToMessageHandlerMiddleware } from '../../../src/Handler/DelegatesToMessageHandlerMiddleware';
+import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/MessageHandlerResolverInterface';
 
 @suite class DelegatesToMessageHandlerMiddlewareUnitTest {
 
