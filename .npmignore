@@ -1,7 +1,6 @@
 .idea
+
+Gulpfile.js
+
+src
 test
-
-gulp.config.js
-GulpFile.js
-
-tslint.json

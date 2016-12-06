@@ -6,9 +6,9 @@ import { SinonStub } from 'sinon';
 import 'sinon-as-promised';
 import * as Promise from 'bluebird';
 
-import { DecoratorMessageHandlerResolver } from '../../../src/Handler/Resolver/DecoratorMessageHandlerResolver';
-import { MessageTypeExtractorInterface } from '../../../src/Extractor/MessageTypeExtractorInterface';
-import { MetadataCallableResolver } from '../../../src/Handler/Metadata/MetadataCallableResolver';
+import { DecoratorMessageHandlerResolver } from '../../../../src/Handler/Resolver/DecoratorMessageHandlerResolver';
+import { MessageTypeExtractorInterface } from '../../../../src/Extractor/MessageTypeExtractorInterface';
+import { MetadataCallableResolver } from '../../../../src/Handler/Metadata/MetadataCallableResolver';
 
 @suite class DecoratorMessageHandlerResolverUnitTest {
 
