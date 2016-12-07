@@ -1,6 +1,9 @@
 .idea
+.nvmrc
 
+bitbucket-pipelines.yml
 Gulpfile.js
+bower.json
 
 src
 test

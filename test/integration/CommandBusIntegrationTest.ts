@@ -10,12 +10,15 @@ import * as Promise from 'bluebird';
 import { MessageBusAllowMiddleware } from '../../src/Bus/MessageBusAllowMiddleware';
 import { MessageBusPromiseMiddleware } from '../../src/Middleware/MessageBusPromiseMiddleware';
 import { DelegatesToMessageHandlerMiddleware } from '../../src/Handler/DelegatesToMessageHandlerMiddleware';
-import { DecoratorMessageHandlerResolver } from '../../src/Handler/Resolver/DecoratorMessageHandlerResolver';
-import { MetadataCallableResolver } from '../../src/Handler/Metadata/MetadataCallableResolver';
 import { ServiceLocatorAwareCallableResolver } from '../../src/CallableResolver/ServiceLocatorAwareCallableResolver';
 import { FunctionConstructorMessageTypeExtractor } from '../../src/Extractor/FunctionConstructorMessageTypeExtractor';
-import { CommandHandlerForTest } from './utility/CommandHandlerForTest';
-import { CommandForTest } from './utility/CommandForTest';
+import { GoodCommandHandlerForTest } from './utility/GoodCommandHandlerForTest';
+import { GoodCommandForTest } from './utility/GoodCommandForTest';
+import { ClassMapHandlerResolver } from '../../src/Handler/Resolver/ClassMapHandlerResolver';
+import { MessageHandlingCollection } from '../../src/Collection/MessageHandlingCollection';
+import { EvilCommandForTest } from './utility/EvilCommandForTest';
+import { EvilCommandHandlerForTest } from './utility/EvilCommandHandlerForTest';
+import { CustomError } from './utility/CustomError';
 
 @suite class CommandBusIntegrationTest {
 
@@ -25,24 +28,37 @@ import { CommandForTest } from './utility/CommandForTest';
   before() {
     this.serviceLocatorMock = sinon.stub() as Function;
 
-    let metadataCallableResolver = new MetadataCallableResolver(
-      new ServiceLocatorAwareCallableResolver(this.serviceLocatorMock)
+    let messageHandlingCollection = new MessageHandlingCollection([
+      { message: GoodCommandForTest, handler: GoodCommandHandlerForTest }
+    ]);
+
+    let functionExtractor = new FunctionConstructorMessageTypeExtractor();
+    let serviceLocatorResolver = new ServiceLocatorAwareCallableResolver(this.serviceLocatorMock);
+
+    let classMapHandlerResolver = new ClassMapHandlerResolver(
+      messageHandlingCollection,
+      serviceLocatorResolver,
+      functionExtractor
     );
 
     this.commandBus = new MessageBusAllowMiddleware([
       new MessageBusPromiseMiddleware(),
-      new DelegatesToMessageHandlerMiddleware(new DecoratorMessageHandlerResolver(
-        new FunctionConstructorMessageTypeExtractor(),
-        metadataCallableResolver
-      ))
+      new DelegatesToMessageHandlerMiddleware(classMapHandlerResolver)
     ]);
   }
 
-  @test 'should execute the correct command handler'() {
-    let command = new CommandForTest();
-    (this.serviceLocatorMock as SinonStub).withArgs(CommandHandlerForTest).returns(new CommandHandlerForTest());
+  @test 'should execute the correct command handler and fulfill'() {
+    let command = new GoodCommandForTest();
+    (this.serviceLocatorMock as SinonStub).withArgs(GoodCommandHandlerForTest).returns(new GoodCommandHandlerForTest());
     return this.commandBus.handle(command)
       .should.be.fulfilled();
+  }
+
+  @test 'should execute the correct command handler and reject'() {
+    let command = new EvilCommandForTest();
+    (this.serviceLocatorMock as SinonStub).withArgs(EvilCommandHandlerForTest).returns(new EvilCommandHandlerForTest());
+    return this.commandBus.handle(command)
+      .should.be.rejected(CustomError);
   }
 }
 

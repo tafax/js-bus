@@ -4,9 +4,3 @@
 
 # Node environment
 node_modules
-
-# Release
-lib
-
-# Documentation
-doc

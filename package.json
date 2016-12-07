@@ -1,11 +1,11 @@
 {
   "name": "js-bus",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "jsBus is a JavaScript library to handle a simple, pluggable and extendable message bus.",
-  "main": "lib/index.js",
-  "typings": "lib/index",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
-    "lib/"
+    "dist/"
   ],
   "scripts": {
     "test": "npm run test:unit && npm run test:integration",
@@ -28,14 +28,12 @@
   "homepage": "https://bitbucket.org/tafax/js-bus#readme",
   "dependencies": {
     "bluebird": "^3.4.6",
-    "core-js": "^2.4.1",
-    "reflect-metadata": "^0.1.8"
+    "lodash": "^4.17.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.0.35",
-    "@types/core-js": "^0.9.34",
+    "@types/lodash": "^4.14.42",
     "@types/mocha": "^2.2.33",
-    "@types/mockery": "^1.4.29",
     "@types/node": "^6.0.48",
     "@types/should": "^8.1.30",
     "@types/sinon": "^1.16.32",
@@ -50,7 +48,6 @@
     "merge2": "^1.0.2",
     "mocha": "^3.1.2",
     "mocha-typescript": "^1.0.11",
-    "mockery": "^2.0.0",
     "should": "^11.1.1",
     "should-sinon": "^0.0.5",
     "sinon": "^1.17.6",
@@ -59,8 +56,6 @@
     "ts-npm-lint": "^0.1.0",
     "tslint": "^4.0.0",
     "typedoc": "^0.5.1",
-    "typescript": "^2.0.10",
-    "webpack": "^1.13.3",
-    "webpack-merge": "^1.0.2"
+    "typescript": "^2.0.10"
   }
 }
