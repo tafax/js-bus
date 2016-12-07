@@ -30,7 +30,8 @@ export class ServiceLocatorAwareCallableResolver implements CallableResolverInte
       if (!identifier.handle) {
         throw new UndefinedHandleCallableError(identifier);
       }
-      return identifier.handle;
+      // Uses the bind to maintain the scope of the object.
+      return identifier.handle.bind(identifier);
     }
 
     throw new CanNotResolveCallableResolverError(identifier);

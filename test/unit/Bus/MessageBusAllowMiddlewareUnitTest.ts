@@ -1,7 +1,4 @@
 
-import 'reflect-metadata';
-import { MessageHandler, messageHandlerMetadataKey } from '../../../src/Handler/Metadata/Decorators/MessageHandlerDecorator';
-
 import { suite, test } from 'mocha-typescript';
 import 'should';
 import * as sinon from 'sinon';

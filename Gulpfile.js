@@ -1,31 +1,37 @@
+'use strict';
 
-var gulp = require('gulp');
-var ts = require('gulp-typescript');
-var merge = require('merge2');
-var sourcemaps = require('gulp-sourcemaps');
-var conventionalChangelog = require('gulp-conventional-changelog');
-var bump = require('gulp-bump');
-var clean = require('gulp-clean');
-var typedoc = require("gulp-typedoc");
+const gulp = require('gulp');
+const ts = require('gulp-typescript');
+const merge = require('merge2');
+const sourcemaps = require('gulp-sourcemaps');
+const conventionalChangelog = require('gulp-conventional-changelog');
+const bump = require('gulp-bump');
+const clean = require('gulp-clean');
+const typedoc = require("gulp-typedoc");
 
-var tsProject = ts.createProject('tsconfig.json');
+// Constants.
+const source = './src/**/*.ts';
+const destination = './dist';
+
+// Creates a ts compiler.
+const tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('clean', function() {
-  return gulp.src('./lib', { read: false })
+  return gulp.src(destination, { read: false })
     .pipe(clean());
 });
 
 gulp.task('compile', function() {
-  var tsResult = gulp.src('src/**/*.ts')
+  var tsResult = gulp.src(source)
     .pipe(sourcemaps.init())
     .pipe(tsProject());
 
   return merge([
     tsResult.dts
-      .pipe(gulp.dest('./lib')),
+      .pipe(gulp.dest(destination)),
     tsResult.js
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest('./lib'))
+      .pipe(gulp.dest(destination))
   ]);
 });
 
@@ -57,7 +63,7 @@ gulp.task('bump-major', function(){
 
 gulp.task('typedoc', function() {
   return gulp
-    .src('./src/**/*.ts')
+    .src(source)
     .pipe(typedoc({
       module: 'commonjs',
       target: 'es6',

@@ -24,7 +24,7 @@ import { UndefinedHandleCallableError } from '../../../src/CallableResolver/Erro
     let identifier: any = 'service';
     let service = { handle: () => {} };
     (this.serviceLocatorMock as SinonStub).withArgs(identifier).returns(service);
-    this.resolver.resolve(identifier).should.be.eql(service.handle);
+    this.resolver.resolve(identifier).should.be.eql(service.handle.bind(service));
   }
 
   @test 'should resolve a class'() {
@@ -32,13 +32,13 @@ import { UndefinedHandleCallableError } from '../../../src/CallableResolver/Erro
     let identifier = ClassIdentifier;
     let service = new ClassIdentifier();
     (this.serviceLocatorMock as SinonStub).withArgs(identifier).returns(service);
-    this.resolver.resolve(identifier).should.be.eql(service.handle);
+    this.resolver.resolve(identifier).should.be.eql(service.handle.bind(service));
   }
 
   @test 'should resolve an object'() {
     class ClassIdentifier { handle() {} }
     let service = new ClassIdentifier();
-    this.resolver.resolve(service).should.be.eql(service.handle);
+    this.resolver.resolve(service).should.be.eql(service.handle.bind(service));
     (this.serviceLocatorMock as SinonStub).calledWith(service).should.be.false();
   }
 
