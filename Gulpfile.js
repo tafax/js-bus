@@ -1,6 +1,7 @@
 'use strict';
 
 const gulp = require('gulp');
+const runSequence = require('run-sequence');
 const ts = require('gulp-typescript');
 const merge = require('merge2');
 const sourcemaps = require('gulp-sourcemaps');
@@ -8,6 +9,8 @@ const conventionalChangelog = require('gulp-conventional-changelog');
 const bump = require('gulp-bump');
 const clean = require('gulp-clean');
 const typedoc = require("gulp-typedoc");
+const git = require('gulp-git');
+const tagVersion = require('gulp-tag-version');
 
 // Constants.
 const source = './src/**/*.ts';
@@ -38,27 +41,31 @@ gulp.task('compile', function() {
 gulp.task('changelog', function () {
   return gulp.src('CHANGELOG.md')
     .pipe(conventionalChangelog({
-      preset: 'angular'
+      preset: 'angular',
+      releaseCount: 0
     }))
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('bump', function(){
-  gulp.src('./package.json')
-    .pipe(bump())
+var bumpVersion = function(type) {
+  return gulp.src('./package.json')
+    .pipe(bump({ type: type }))
     .pipe(gulp.dest('./'));
+};
+
+gulp.task('bump', bumpVersion.bind(bumpVersion, 'path'));
+gulp.task('bump-minor', bumpVersion.bind(bumpVersion, 'minor'));
+gulp.task('bump-major', bumpVersion.bind(bumpVersion, 'major'));
+
+gulp.task('tag', function() {
+  return gulp.src('./package.json')
+    .pipe(tagVersion());
 });
 
-gulp.task('bump-minor', function(){
-  gulp.src('./package.json')
-    .pipe(bump({ type:'minor' }))
-    .pipe(gulp.dest('./'));
-});
-
-gulp.task('bump-major', function(){
-  gulp.src('./package.json')
-    .pipe(bump({ type:'major' }))
-    .pipe(gulp.dest('./'));
+gulp.task('commit', function() {
+  return gulp.src('./')
+    .pipe(git.add())
+    .pipe(git.commit('Release new version'));
 });
 
 gulp.task('typedoc', function() {
@@ -78,5 +85,21 @@ gulp.task('typedoc', function() {
     ;
 });
 
-gulp.task('default', ['clean', 'compile']);
-gulp.task('release', ['default', 'bump', 'changelog', 'typedoc']);
+gulp.task('default', function() {
+  return runSequence(
+    'clean',
+    'compile'
+  );
+});
+
+gulp.task('release', function() {
+  return runSequence(
+    'default',
+    'typedoc',
+    'bump',
+    // TODO: Why no changelog?
+    //'changelog',
+    'commit',
+    'tag'
+  )
+});
