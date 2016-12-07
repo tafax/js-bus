@@ -1,0 +1,266 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>js-bus</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">js-bus</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> js-bus</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="jsbus">jsBus</h1>
+				<p>This is an experimental library inspired by <a href="https://github.com/SimpleBus/MessageBus">MessageBus</a> for PHP.</p>
+				<h2 id="motivations">Motivations</h2>
+				<p>In the client side, in many enterprise situations, decoupling the UI/UX from the business logic is hard to accomplish.
+					We usually move a lot of code in the controllers, we inject a lot of services and we create <em>evil smart controllers</em>.
+					Someone add business logic in these controllers and nobody often tests it since the controllers are very hard to test
+					as unit. Anyway, just the integrations test are not enough to grant maintainability of what you&#39;re building.
+					When you want to refactor your code to update the UI/UX, if you coded fast to sell fast :),
+					you likely will need to add complexity and you&#39;ll trigger the breaking point of your app very soon.
+					Boom! Everything can&#39;t be maintained anymore.
+					This library can help you to organize your code, decoupling what happens in the UI layer with what you need to do
+				with your data behind the hood.</p>
+				<h2 id="install">Install</h2>
+				<h3 id="internal-to-remove-if-published-">Internal (to remove if published)</h3>
+				<p>After followed the steps to development. Go to the project root.</p>
+				<pre><code><span class="hljs-attribute">yarn link</span>
+</code></pre><p>then in the project root</p>
+				<pre><code><span class="hljs-attribute">yarn link js-bus</span>
+</code></pre><p>If you want to remove the dependency, just type the same command using <code>unlink</code> instead of <code>link</code>.</p>
+				<h2 id="development">Development</h2>
+				<p>We use <strong>NodeJS</strong> and <strong>NVM</strong> to handle the node versions. So, first of all:</p>
+				<ul>
+					<li>Git clone this repo.</li>
+					<li>Install <code>nvm</code> if you don&#39;t have it already: <code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash</code>.
+					This installs version <code>v0.32.1</code>, but any other should be the same.</li>
+					<li>Install the version of node we use in the project. In the project root perform <code>cat .nvmrc</code> to see this version.
+					Let&#39;s say it is <code>v6.5.0</code>. Afterwards, run <code>nvm install v6.5.0</code>.</li>
+					<li>Install <strong>yarn</strong> dependency manager. <code>npm install -g yarn</code>.</li>
+					<li>Type <code>yarn install</code> to install all dependencies.</li>
+					<li>Type <code>npm run typings install</code> to install all the standalone typings.</li>
+					<li>Good to go!</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Internals</span>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_bus_messagebusallowmiddleware_.html">"src/<wbr>Bus/<wbr>Message<wbr>Bus<wbr>Allow<wbr>Middleware"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_bus_messagebusinterface_.html">"src/<wbr>Bus/<wbr>Message<wbr>Bus<wbr>Interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_bus_index_.html">"src/<wbr>Bus/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_callableresolver_callableresolverinterface_.html">"src/<wbr>Callable<wbr>Resolver/<wbr>Callable<wbr>Resolver<wbr>Interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_callableresolver_errors_callableresolvererror_.html">"src/<wbr>Callable<wbr>Resolver/<wbr>Errors/<wbr>Callable<wbr>Resolver<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_callableresolver_errors_cannotresolvecallableerror_.html">"src/<wbr>Callable<wbr>Resolver/<wbr>Errors/<wbr>Can<wbr>Not<wbr>Resolve<wbr>Callable<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_callableresolver_errors_undefinedhandlecallableerror_.html">"src/<wbr>Callable<wbr>Resolver/<wbr>Errors/<wbr>Undefined<wbr>Handle<wbr>Callable<wbr>Error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_callableresolver_errors_index_.html">"src/<wbr>Callable<wbr>Resolver/<wbr>Errors/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_callableresolver_servicelocatorawarecallableresolver_.html">"src/<wbr>Callable<wbr>Resolver/<wbr>Service<wbr>Locator<wbr>Aware<wbr>Callable<wbr>Resolver"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_callableresolver_index_.html">"src/<wbr>Callable<wbr>Resolver/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_collection_messagehandlingcollection_.html">"src/<wbr>Collection/<wbr>Message<wbr>Handling<wbr>Collection"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_collection_index_.html">"src/<wbr>Collection/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_extractor_functionconstructormessagetypeextractor_.html">"src/<wbr>Extractor/<wbr>Function<wbr>Constructor<wbr>Message<wbr>Type<wbr>Extractor"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_extractor_messagetypeextractorinterface_.html">"src/<wbr>Extractor/<wbr>Message<wbr>Type<wbr>Extractor<wbr>Interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_extractor_index_.html">"src/<wbr>Extractor/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_handler_delegatestomessagehandlermiddleware_.html">"src/<wbr>Handler/<wbr>Delegates<wbr>ToMessage<wbr>Handler<wbr>Middleware"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_handler_resolver_classmaphandlerresolver_.html">"src/<wbr>Handler/<wbr>Resolver/<wbr>Class<wbr>Map<wbr>Handler<wbr>Resolver"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_handler_resolver_messagehandlerresolverinterface_.html">"src/<wbr>Handler/<wbr>Resolver/<wbr>Message<wbr>Handler<wbr>Resolver<wbr>Interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_handler_resolver_index_.html">"src/<wbr>Handler/<wbr>Resolver/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_handler_index_.html">"src/<wbr>Handler/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_middleware_messagebusmiddlewareinterface_.html">"src/<wbr>Middleware/<wbr>Message<wbr>Bus<wbr>Middleware<wbr>Interface"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_middleware_messagebuspromisemiddleware_.html">"src/<wbr>Middleware/<wbr>Message<wbr>Bus<wbr>Promise<wbr>Middleware"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_middleware_index_.html">"src/<wbr>Middleware/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_src_index_.html">"src/index"</a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_node_modules__types_bluebird_index_d_.html">"node_<wbr>modules/@types/bluebird/index.d"</a>
+					</li>
+					<li class=" tsd-kind-external-module tsd-is-external">
+						<a href="modules/_node_modules__types_lodash_index_d_.html">"node_<wbr>modules/@types/lodash/index.d"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+"use strict";
+/**
+ * Provides the ability to get the function constructor of an object.
+ * At runtime, it can be considered the class of the object.
+ */
+var FunctionConstructorMessageTypeExtractor = (function () {
+    function FunctionConstructorMessageTypeExtractor() {
+    }
+    /**
+     * @inheritDoc
+     */
+    FunctionConstructorMessageTypeExtractor.prototype.extract = function (message) {
+        return message.constructor;
+    };
+    return FunctionConstructorMessageTypeExtractor;
+}());
+exports.FunctionConstructorMessageTypeExtractor = FunctionConstructorMessageTypeExtractor;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9FeHRyYWN0b3IvRnVuY3Rpb25Db25zdHJ1Y3Rvck1lc3NhZ2VUeXBlRXh0cmFjdG9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFHQTs7O0dBR0c7QUFDSDtJQUFBO0lBUUEsQ0FBQztJQU5DOztPQUVHO0lBQ0gseURBQU8sR0FBUCxVQUFRLE9BQVk7UUFDbEIsTUFBTSxDQUFFLE9BQWtCLENBQUMsV0FBVyxDQUFDO0lBQ3pDLENBQUM7SUFDSCw4Q0FBQztBQUFELENBUkEsQUFRQyxJQUFBO0FBUlksK0NBQXVDLDBDQVFuRCxDQUFBIiwiZmlsZSI6IkV4dHJhY3Rvci9GdW5jdGlvbkNvbnN0cnVjdG9yTWVzc2FnZVR5cGVFeHRyYWN0b3IuanMiLCJzb3VyY2VzQ29udGVudCI6WyJcbmltcG9ydCB7IE1lc3NhZ2VUeXBlRXh0cmFjdG9ySW50ZXJmYWNlIH0gZnJvbSAnLi9NZXNzYWdlVHlwZUV4dHJhY3RvckludGVyZmFjZSc7XG5cbi8qKlxuICogUHJvdmlkZXMgdGhlIGFiaWxpdHkgdG8gZ2V0IHRoZSBmdW5jdGlvbiBjb25zdHJ1Y3RvciBvZiBhbiBvYmplY3QuXG4gKiBBdCBydW50aW1lLCBpdCBjYW4gYmUgY29uc2lkZXJlZCB0aGUgY2xhc3Mgb2YgdGhlIG9iamVjdC5cbiAqL1xuZXhwb3J0IGNsYXNzIEZ1bmN0aW9uQ29uc3RydWN0b3JNZXNzYWdlVHlwZUV4dHJhY3RvciBpbXBsZW1lbnRzIE1lc3NhZ2VUeXBlRXh0cmFjdG9ySW50ZXJmYWNlIHtcblxuICAvKipcbiAgICogQGluaGVyaXREb2NcbiAgICovXG4gIGV4dHJhY3QobWVzc2FnZTogYW55KTogRnVuY3Rpb24ge1xuICAgIHJldHVybiAobWVzc2FnZSBhcyBPYmplY3QpLmNvbnN0cnVjdG9yO1xuICB9XG59XG4iXX0=
