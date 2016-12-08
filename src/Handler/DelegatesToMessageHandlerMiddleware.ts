@@ -22,9 +22,9 @@ export class DelegatesToMessageHandlerMiddleware implements MessageBusMiddleware
    * Handles the message and propagate it to the next middleware.
    * @param {any} message The message to handle.
    * @param {Function} next The next middleware function.
-   * @return {Bluebird<any>}
+   * @return {Promise<any>}
    */
-  handle(message: any, next: Function): any {
+  handle(message: any, next: Function): Promise<any> {
     // It resolves immediately the promise to allow
     // the chain to dealloc resources.
     return Promise.resolve([message, next])
@@ -34,9 +34,13 @@ export class DelegatesToMessageHandlerMiddleware implements MessageBusMiddleware
         // Wraps the handler into a promise to be sure to respect
         // the chain.
         return Promise.try(() => handler(message))
-          .then(() => [message, next]);
+          .then((result: any) => [message, next, result]);
       })
       // Calls the next middleware function.
-      .spread((message: any, next: Function) => next(message));
+      .spread((message: any, next: Function, result: any) => {
+        return Promise.resolve(result)
+          .tap(() => next(message))
+          .then(() => result);
+      });
   }
 }

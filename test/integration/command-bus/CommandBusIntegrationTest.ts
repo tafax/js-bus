@@ -1,5 +1,4 @@
 
-
 import { suite, test } from 'mocha-typescript';
 import 'should';
 import * as sinon from 'sinon';
@@ -7,15 +6,15 @@ import { SinonStub } from 'sinon';
 import 'sinon-as-promised';
 import * as Promise from 'bluebird';
 
-import { MessageBusAllowMiddleware } from '../../src/Bus/MessageBusAllowMiddleware';
-import { MessageBusPromiseMiddleware } from '../../src/Middleware/MessageBusPromiseMiddleware';
-import { DelegatesToMessageHandlerMiddleware } from '../../src/Handler/DelegatesToMessageHandlerMiddleware';
-import { ServiceLocatorAwareCallableResolver } from '../../src/CallableResolver/ServiceLocatorAwareCallableResolver';
-import { FunctionConstructorMessageTypeExtractor } from '../../src/Extractor/FunctionConstructorMessageTypeExtractor';
+import { MessageBusAllowMiddleware } from '../../../src/Bus/MessageBusAllowMiddleware';
+import { MessageBusPromiseMiddleware } from '../../../src/Middleware/MessageBusPromiseMiddleware';
+import { DelegatesToMessageHandlerMiddleware } from '../../../src/Handler/DelegatesToMessageHandlerMiddleware';
+import { ServiceLocatorAwareCallableResolver } from '../../../src/CallableResolver/ServiceLocatorAwareCallableResolver';
+import { FunctionConstructorMessageTypeExtractor } from '../../../src/Extractor/FunctionConstructorMessageTypeExtractor';
 import { GoodCommandHandlerForTest } from './utility/GoodCommandHandlerForTest';
 import { GoodCommandForTest } from './utility/GoodCommandForTest';
-import { ClassMapHandlerResolver } from '../../src/Handler/Resolver/ClassMapHandlerResolver';
-import { MessageHandlingCollection } from '../../src/Collection/MessageHandlingCollection';
+import { ClassMapHandlerResolver } from '../../../src/Handler/Resolver/ClassMapHandlerResolver';
+import { MessageHandlingCollection } from '../../../src/Collection/MessageHandlingCollection';
 import { EvilCommandForTest } from './utility/EvilCommandForTest';
 import { EvilCommandHandlerForTest } from './utility/EvilCommandHandlerForTest';
 import { CustomError } from './utility/CustomError';
