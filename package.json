@@ -11,6 +11,7 @@
     "test": "npm run test:unit && npm run test:integration",
     "test:unit": "mocha --compilers ts:ts-node/register --recursive test/unit",
     "test:integration": "mocha --compilers ts:ts-node/register --recursive test/integration",
+    "cz:init": "commitizen init cz-conventional-changelog --save-dev --save-exact",
     "package:lint": "ts-npm-lint"
   },
   "repository": {
@@ -38,6 +39,7 @@
     "@types/should": "^8.1.30",
     "@types/sinon": "^1.16.32",
     "@types/sinon-as-promised": "^4.0.5",
+    "cz-conventional-changelog": "^1.2.0",
     "gulp": "^3.9.1",
     "gulp-bump": "^2.5.0",
     "gulp-clean": "^0.3.2",
@@ -60,5 +62,10 @@
     "tslint": "^4.0.0",
     "typedoc": "^0.5.1",
     "typescript": "^2.0.10"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
