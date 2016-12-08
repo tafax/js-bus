@@ -33,9 +33,30 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     (handler.withArgs(message) as SinonStub).resolves('handler-resolved');
     (next.withArgs(message) as SinonStub).resolves('next-resolved');
 
-    return this.delegatesToMessageHandlerMiddleware.handle(message, next)
+    return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as any)
       .should.be.fulfilled()
       .then(() => {
+        handler.calledWith(message).should.be.true();
+        next.calledWith(message).should.be.true();
+      });
+  }
+
+  @test 'should resolve the handler and return the handle value'() {
+
+    let message = 'message';
+    let next = sinon.stub();
+
+    let handler = sinon.stub();
+    (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
+
+    (handler.withArgs(message) as SinonStub).resolves('handler-resolved');
+    (next.withArgs(message) as SinonStub).resolves('next-resolved');
+
+    return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as any)
+      .should.be.fulfilled()
+      .then((result: any) => {
+        result.should.be.eql('handler-resolved');
+
         handler.calledWith(message).should.be.true();
         next.calledWith(message).should.be.true();
       });
@@ -52,7 +73,7 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     (handler.withArgs(message) as SinonStub).rejects(new Error('handler-rejected'));
     (next.withArgs(message) as SinonStub).resolves('next-resolved');
 
-    return this.delegatesToMessageHandlerMiddleware.handle(message, next)
+    return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as any)
       .should.be.rejected(Error)
       .then(() => {
         handler.calledWith(message).should.be.true();
