@@ -16,16 +16,15 @@ with your data behind the hood.
 
 ## Install
 
-### Internal (to remove if published)
-After followed the steps to development. Go to the project root.
+### NPM
 ```
-yarn link
+npm install ssh://bitbucket.org/tafax/js-bus.git
 ```
-then in the project root
+
+### Yarn
 ```
-yarn link js-bus
+yarn add ssh://@bitbucket.org/tafax/js-bus.git
 ```
-If you want to remove the dependency, just type the same command using `unlink` instead of `link`.
 
 ## Development
 
@@ -40,3 +39,30 @@ Let's say it is `v6.5.0`. Afterwards, run `nvm install v6.5.0`.
 * Type `yarn install` to install all dependencies.
 * Type `npm run typings install` to install all the standalone typings.
 * Good to go!
+
+### Link for development (optional)
+
+If you want to link the library to an existing project before pushing your changes.
+You can go to the library root and type:
+```
+yarn link
+```
+then in the project root:
+```
+yarn link js-bus
+```
+If you want to remove the dependency, just type the same command using `unlink` instead of `link`.
+
+## Contributing
+
+We use conventional commit so install `commitizen`.
+```
+npm install -g commitizen
+```
+Afterwards, add the conventional changelog adapter. Go in the library root and type:
+```
+npm run cz:init
+```
+
+You are set! Each time you want to commit something use `git cz` instead of
+`git commit` and follow the wizard to create the commit message.

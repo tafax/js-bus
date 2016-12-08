@@ -42,7 +42,7 @@ gulp.task('changelog', function () {
   return gulp.src('CHANGELOG.md')
     .pipe(conventionalChangelog({
       preset: 'angular',
-      releaseCount: 0
+      releaseCount: 1
     }))
     .pipe(gulp.dest('./'));
 });
@@ -97,9 +97,8 @@ gulp.task('release', function() {
     'default',
     'typedoc',
     'bump',
-    // TODO: Why no changelog?
-    //'changelog',
     'commit',
-    'tag'
+    'tag',
+    'changelog'
   )
 });
