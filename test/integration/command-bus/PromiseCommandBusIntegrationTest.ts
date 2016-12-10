@@ -7,19 +7,18 @@ import 'sinon-as-promised';
 import * as Promise from 'bluebird';
 
 import { MessageBusAllowMiddleware } from '../../../src/Bus/MessageBusAllowMiddleware';
-import { MessageBusPromiseMiddleware } from '../../../src/Middleware/MessageBusPromiseMiddleware';
-import { DelegatesToMessageHandlerMiddleware } from '../../../src/Handler/DelegatesToMessageHandlerMiddleware';
+import { PromiseDelegatesMessageHandlerMiddleware } from '../../../src/Handler/PromiseDelegatesMessageHandlerMiddleware';
 import { ServiceLocatorAwareCallableResolver } from '../../../src/CallableResolver/ServiceLocatorAwareCallableResolver';
 import { FunctionConstructorMessageTypeExtractor } from '../../../src/Extractor/FunctionConstructorMessageTypeExtractor';
-import { GoodCommandHandlerForTest } from './utility/GoodCommandHandlerForTest';
+import { PromiseGoodCommandHandlerForTest } from './utility/PromiseGoodCommandHandlerForTest';
 import { GoodCommandForTest } from './utility/GoodCommandForTest';
 import { ClassMapHandlerResolver } from '../../../src/Handler/Resolver/ClassMapHandlerResolver';
 import { MessageHandlingCollection } from '../../../src/Collection/MessageHandlingCollection';
 import { EvilCommandForTest } from './utility/EvilCommandForTest';
-import { EvilCommandHandlerForTest } from './utility/EvilCommandHandlerForTest';
+import { PromiseEvilCommandHandlerForTest } from './utility/PromiseEvilCommandHandlerForTest';
 import { CustomError } from './utility/CustomError';
 
-@suite class CommandBusIntegrationTest {
+@suite class PromiseCommandBusIntegrationTest {
 
   commandBus: MessageBusAllowMiddleware;
   serviceLocatorMock: Function;
@@ -28,7 +27,8 @@ import { CustomError } from './utility/CustomError';
     this.serviceLocatorMock = sinon.stub() as Function;
 
     let messageHandlingCollection = new MessageHandlingCollection([
-      { message: GoodCommandForTest, handler: GoodCommandHandlerForTest }
+      { message: GoodCommandForTest, handler: PromiseGoodCommandHandlerForTest },
+      { message: EvilCommandForTest, handler: PromiseEvilCommandHandlerForTest }
     ]);
 
     let functionExtractor = new FunctionConstructorMessageTypeExtractor();
@@ -41,21 +41,20 @@ import { CustomError } from './utility/CustomError';
     );
 
     this.commandBus = new MessageBusAllowMiddleware([
-      new MessageBusPromiseMiddleware(),
-      new DelegatesToMessageHandlerMiddleware(classMapHandlerResolver)
+      new PromiseDelegatesMessageHandlerMiddleware(classMapHandlerResolver)
     ]);
   }
 
   @test 'should execute the correct command handler and fulfill'() {
     let command = new GoodCommandForTest();
-    (this.serviceLocatorMock as SinonStub).withArgs(GoodCommandHandlerForTest).returns(new GoodCommandHandlerForTest());
+    (this.serviceLocatorMock as SinonStub).withArgs(PromiseGoodCommandHandlerForTest).returns(new PromiseGoodCommandHandlerForTest());
     return this.commandBus.handle(command)
       .should.be.fulfilled();
   }
 
   @test 'should execute the correct command handler and reject'() {
     let command = new EvilCommandForTest();
-    (this.serviceLocatorMock as SinonStub).withArgs(EvilCommandHandlerForTest).returns(new EvilCommandHandlerForTest());
+    (this.serviceLocatorMock as SinonStub).withArgs(PromiseEvilCommandHandlerForTest).returns(new PromiseEvilCommandHandlerForTest());
     return this.commandBus.handle(command)
       .should.be.rejected(CustomError);
   }

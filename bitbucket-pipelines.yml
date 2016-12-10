@@ -6,4 +6,5 @@ pipelines:
         script:
           - npm install -g yarn
           - yarn install
+          - yarn add rxjs@5.0.0-rc.5
           - npm test

@@ -1,10 +1,10 @@
 
-import * as Promise from 'bluebird';
+import { Observable } from 'rxjs';
 import { GoodCommandForTest } from './GoodCommandForTest';
 
-export class GoodCommandHandlerForTest {
+export class ObservableGoodCommandHandlerForTest {
   handle(command: GoodCommandForTest) {
     command.checkProperty.should.be.eql('alright!');
-    return Promise.resolve();
+    return Observable.of();
   }
 }

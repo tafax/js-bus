@@ -1,3 +1,3 @@
 
 export * from './Resolver';
-export { DelegatesToMessageHandlerMiddleware } from './DelegatesToMessageHandlerMiddleware';
+export { DelegatesToMessageHandlerMiddleware } from './AbstractDelegatesToMessageHandlerMiddleware';
