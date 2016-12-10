@@ -1,7 +1,6 @@
 
 import * as Promise from 'bluebird';
-import { MessageBusMiddlewareInterface } from '../Middleware/MessageBusMiddlewareInterface';
-import { MessageHandlerResolverInterface } from './Resolver/MessageHandlerResolverInterface';
+import { AbstractDelegatesToMessageHandlerMiddleware } from './AbstractDelegatesToMessageHandlerMiddleware';
 
 /**
  * Allows to handle a message using a specific handler function.
@@ -10,21 +9,14 @@ import { MessageHandlerResolverInterface } from './Resolver/MessageHandlerResolv
  * propagate the message itself to the next middleware. It doesn't handle
  * errors.
  */
-export class DelegatesToMessageHandlerMiddleware implements MessageBusMiddlewareInterface {
-
-  /**
-   * Creates a new DelegatesToMessageHandlerMiddleware.
-   * @param _messageHandlerResolver
-   */
-  constructor(private _messageHandlerResolver: MessageHandlerResolverInterface) {}
-
+export class PromiseDelegatesMessageHandlerMiddleware extends AbstractDelegatesToMessageHandlerMiddleware {
   /**
    * Handles the message and propagate it to the next middleware.
    * @param {any} message The message to handle.
    * @param {Function} next The next middleware function.
    * @return {Promise<any>}
    */
-  handle(message: any, next: Function): Promise<any> {
+  handle(message: any, next: Function): any {
     // It resolves immediately the promise to allow
     // the chain to dealloc resources.
     return Promise.resolve([message, next])

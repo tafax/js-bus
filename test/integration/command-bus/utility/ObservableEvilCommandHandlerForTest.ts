@@ -1,11 +1,11 @@
 
-import * as Promise from 'bluebird';
 import { EvilCommandForTest } from './EvilCommandForTest';
 import { CustomError } from './CustomError';
+import { Observable } from 'rxjs';
 
-export class EvilCommandHandlerForTest {
+export class ObservableEvilCommandHandlerForTest {
   handle(command: EvilCommandForTest) {
     command.checkProperty.should.be.eql('alright!');
-    return Promise.reject(new CustomError('some error'));
+    return Observable.throw(new CustomError('some error')) as Observable<any>;
   }
 }

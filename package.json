@@ -63,6 +63,9 @@
     "typedoc": "^0.5.1",
     "typescript": "^2.0.10"
   },
+  "peerDependencies": {
+    "rxjs": "^5.0.0-rc.5"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

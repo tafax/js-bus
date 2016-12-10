@@ -6,12 +6,12 @@ import { SinonStub } from 'sinon';
 import 'sinon-as-promised';
 import * as Promise from 'bluebird';
 
-import { DelegatesToMessageHandlerMiddleware } from '../../../src/Handler/DelegatesToMessageHandlerMiddleware';
+import { PromiseDelegatesMessageHandlerMiddleware } from '../../../src/Handler/PromiseDelegatesMessageHandlerMiddleware';
 import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/MessageHandlerResolverInterface';
 
-@suite class DelegatesToMessageHandlerMiddlewareUnitTest {
+@suite class PromiseDelegatesMessageHandlerMiddlewareUnitTest {
 
-  private delegatesToMessageHandlerMiddleware: DelegatesToMessageHandlerMiddleware;
+  private delegatesToMessageHandlerMiddleware: PromiseDelegatesMessageHandlerMiddleware;
 
   private messageHandlerResolverMock: MessageHandlerResolverInterface;
 
@@ -19,7 +19,7 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     this.messageHandlerResolverMock = <MessageHandlerResolverInterface>{
       getHandler: sinon.stub()
     };
-    this.delegatesToMessageHandlerMiddleware = new DelegatesToMessageHandlerMiddleware(this.messageHandlerResolverMock);
+    this.delegatesToMessageHandlerMiddleware = new PromiseDelegatesMessageHandlerMiddleware(this.messageHandlerResolverMock);
   }
 
   @test 'should resolve the handler'() {
@@ -41,6 +41,25 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
       });
   }
 
+  @test 'should resolve the handler if not promise'() {
+
+    let message = 'message';
+    let next = sinon.stub();
+
+    let handler = sinon.stub();
+    (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
+
+    (handler.withArgs(message) as SinonStub).returns('handler-resolved');
+    (next.withArgs(message) as SinonStub).returns('next-resolved');
+
+    return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as any)
+      .should.be.fulfilled()
+      .then(() => {
+        handler.calledWith(message).should.be.true();
+        next.calledWith(message).should.be.true();
+      });
+  }
+
   @test 'should resolve the handler and return the handle value'() {
 
     let message = 'message';
@@ -51,6 +70,27 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
 
     (handler.withArgs(message) as SinonStub).resolves('handler-resolved');
     (next.withArgs(message) as SinonStub).resolves('next-resolved');
+
+    return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as any)
+      .should.be.fulfilled()
+      .then((result: any) => {
+        result.should.be.eql('handler-resolved');
+
+        handler.calledWith(message).should.be.true();
+        next.calledWith(message).should.be.true();
+      });
+  }
+
+  @test 'should resolve the handler and return the handle value if not promise'() {
+
+    let message = 'message';
+    let next = sinon.stub();
+
+    let handler = sinon.stub();
+    (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
+
+    (handler.withArgs(message) as SinonStub).returns('handler-resolved');
+    (next.withArgs(message) as SinonStub).returns('next-resolved');
 
     return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as any)
       .should.be.fulfilled()
