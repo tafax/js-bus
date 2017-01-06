@@ -5,26 +5,19 @@ This is an experimental library inspired by [MessageBus](https://github.com/Simp
 
 ## Motivations
 
-In the client side, in many enterprise situations, decoupling the UI/UX from the business logic is hard to accomplish. 
-We usually move a lot of code in the controllers, we inject a lot of services and we create *evil smart controllers*.
-Someone add business logic in these controllers and nobody often tests it since the controllers are very hard to test
-as unit. Anyway, just the integrations test are not enough to grant maintainability of what you're building.
-When you want to refactor your code to update the UI/UX, if you coded fast to sell fast :), 
-you likely will need to add complexity and you'll trigger the breaking point of your app very soon. 
-Boom! Everything can't be maintained anymore.
-This library can help you to organize your code, decoupling what happens in the UI layer with what you need to do
-with your data behind the hood.
+This is just an experimental library to decoupling UI/UX code and the business logic. It is intended to be used with Angular2 projects.
+Anyway, it is written in TypeScript and it can be used with any TypeScript application without limitations.
 
 ## Install
 
 ### NPM
 ```
-npm install ssh://bitbucket.org/tafax/js-bus.git
+npm install js-bus
 ```
 
 ### Yarn
 ```
-yarn add ssh://@bitbucket.org/tafax/js-bus.git
+yarn add js-bus
 ```
 
 ## Development
