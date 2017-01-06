@@ -1,2 +1,4 @@
 export * from './Resolver';
-export { DelegatesToMessageHandlerMiddleware } from './DelegatesToMessageHandlerMiddleware';
+export { AbstractDelegatesToMessageHandlerMiddleware } from './AbstractDelegatesToMessageHandlerMiddleware';
+export { PromiseDelegatesMessageHandlerMiddleware } from './PromiseDelegatesMessageHandlerMiddleware';
+export { ObservableDelegatesMessageHandlerMiddleware } from './ObservableDelegatesMessageHandlerMiddleware';

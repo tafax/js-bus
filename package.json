@@ -1,6 +1,6 @@
 {
   "name": "js-bus",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "jsBus is a JavaScript library to handle a simple, pluggable and extendable message bus.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
