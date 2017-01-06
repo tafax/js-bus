@@ -1,0 +1,12 @@
+sudo: required
+dist: trusty
+
+language: node_js
+node_js: '7.1.0'
+
+install:
+ - npm install -g yarn@0.18.1
+ - yarn install
+
+script:
+ - npm run test:travis
