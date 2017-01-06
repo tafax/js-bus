@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "test": "npm run test:unit && npm run test:integration",
+    "test:travis": "npm run test:unit && npm run test:integration",
     "test:unit": "mocha --compilers ts:ts-node/register --recursive test/unit",
     "test:integration": "mocha --compilers ts:ts-node/register --recursive test/integration",
     "cz:init": "commitizen init cz-conventional-changelog --save-dev --save-exact",
@@ -16,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/tafax/js-bus.git"
+    "url": "https://github.com/tafax/js-bus.git"
   },
   "keywords": [
     "typescript",
@@ -26,7 +27,6 @@
   ],
   "author": "Matteo Tafani Alunno",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/tafax/js-bus#readme",
   "dependencies": {
     "bluebird": "^3.4.6",
     "lodash": "^4.17.2",
