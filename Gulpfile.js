@@ -38,15 +38,6 @@ gulp.task('compile', function() {
   ]);
 });
 
-gulp.task('changelog', function () {
-  return gulp.src('CHANGELOG.md')
-    .pipe(conventionalChangelog({
-      preset: 'angular',
-      releaseCount: 1
-    }))
-    .pipe(gulp.dest('./'));
-});
-
 var bumpVersion = function(type) {
   return gulp.src('./package.json')
     .pipe(bump({ type: type }))
@@ -98,7 +89,6 @@ gulp.task('release', function() {
     'typedoc',
     'bump',
     'commit',
-    'tag',
-    'changelog'
+    'tag'
   )
 });
