@@ -29,7 +29,8 @@
   "homepage": "https://bitbucket.org/tafax/js-bus#readme",
   "dependencies": {
     "bluebird": "^3.4.6",
-    "lodash": "^4.17.2"
+    "lodash": "^4.17.2",
+    "rxjs": "^5.0.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.0.35",
@@ -62,9 +63,6 @@
     "tslint": "^4.0.0",
     "typedoc": "^0.5.1",
     "typescript": "^2.0.10"
-  },
-  "peerDependencies": {
-    "rxjs": "^5.0.0-rc.5"
   },
   "config": {
     "commitizen": {
