@@ -48,7 +48,7 @@ import { CustomError } from './utility/CustomError';
   @test 'should execute the correct command handler and fulfill'(done) {
     let command = new GoodCommandForTest();
     (this.serviceLocatorMock as SinonStub).withArgs(PromiseGoodCommandHandlerForTest).returns(new PromiseGoodCommandHandlerForTest());
-    return this.commandBus.handle(command)
+    this.commandBus.handle(command)
       .subscribe(
         () => { done(); }
       );

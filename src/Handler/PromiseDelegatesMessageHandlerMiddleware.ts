@@ -13,9 +13,9 @@ import { Observable } from 'rxjs/Observable';
 export class PromiseDelegatesMessageHandlerMiddleware extends AbstractDelegatesToMessageHandlerMiddleware {
   /**
    * Handles the message and propagate it to the next middleware.
-   * @param {any} message The message to handle.
-   * @param {Function} next The next middleware function.
-   * @return {Promise<any>}
+   * @param {T} message The message to handle.
+   * @param {(message: T) => any} next The next middleware function.
+   * @return {Observable<any>}
    */
   handle<T>(message: any, next: (message: T) => any): Observable<any> {
     // It resolves immediately the promise to allow
