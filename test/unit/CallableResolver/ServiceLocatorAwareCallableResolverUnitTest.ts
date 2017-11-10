@@ -1,5 +1,5 @@
 
-import { suite, test } from 'mocha-typescript';
+import { suite, test, only } from 'mocha-typescript';
 import 'should';
 import * as sinon from 'sinon';
 import { SinonStub } from 'sinon';
@@ -44,7 +44,7 @@ import { UndefinedHandleCallableError } from '../../../src/CallableResolver/Erro
 
   @test 'should throw an error if it can\'t resolve the identifier'() {
     (() => {
-      this.resolver.resolve(10)
+      this.resolver.resolve(10);
     }).should.throw(CanNotResolveCallableResolverError);
   }
 

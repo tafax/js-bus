@@ -1,4 +1,5 @@
 
+import { Observable } from 'rxjs/Observable';
 import { MessageBusMiddlewareInterface } from '../Middleware/MessageBusMiddlewareInterface';
 import { MessageHandlerResolverInterface } from './Resolver/MessageHandlerResolverInterface';
 
@@ -20,5 +21,5 @@ export abstract class AbstractDelegatesToMessageHandlerMiddleware implements Mes
   /**
    * @inheritDoc
    */
-  abstract handle(message: any, next: Function): any;
+  abstract handle<T>(message: T, next: (message: T) => Observable<any>): Observable<any>;
 }

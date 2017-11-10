@@ -7,10 +7,10 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": false,
     "declaration": true,
     "outDir": "lib",
-    "lib": ["es5", "dom", "es2015"]
+    "lib": [ "es5", "dom", "es2015" ]
   }
 }

@@ -4,3 +4,6 @@
 
 # Node environment
 node_modules
+
+# Caches
+.ts-node-cache

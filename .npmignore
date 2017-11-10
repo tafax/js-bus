@@ -1,7 +1,7 @@
 .idea
 .nvmrc
+.ts-node-cache
 
-bitbucket-pipelines.yml
 Gulpfile.js
 bower.json
 
