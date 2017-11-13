@@ -6,6 +6,6 @@ import { CustomError } from './CustomError';
 export class PromiseEvilCommandHandlerForTest {
   handle(command: EvilCommandForTest) {
     command.checkProperty.should.be.eql('alright!');
-    return Promise.reject(new CustomError('some error'));
+    return Promise.reject(new CustomError());
   }
 }

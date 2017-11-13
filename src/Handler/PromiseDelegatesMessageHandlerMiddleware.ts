@@ -1,6 +1,7 @@
 
 import * as Promise from 'bluebird';
 import { AbstractDelegatesToMessageHandlerMiddleware } from './AbstractDelegatesToMessageHandlerMiddleware';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Allows to handle a message using a specific handler function.
@@ -12,27 +13,29 @@ import { AbstractDelegatesToMessageHandlerMiddleware } from './AbstractDelegates
 export class PromiseDelegatesMessageHandlerMiddleware extends AbstractDelegatesToMessageHandlerMiddleware {
   /**
    * Handles the message and propagate it to the next middleware.
-   * @param {any} message The message to handle.
-   * @param {Function} next The next middleware function.
-   * @return {Promise<any>}
+   * @param {T} message The message to handle.
+   * @param {(message: T) => any} next The next middleware function.
+   * @return {Observable<any>}
    */
-  handle(message: any, next: Function): any {
+  handle<T>(message: any, next: (message: T) => any): Observable<any> {
     // It resolves immediately the promise to allow
     // the chain to dealloc resources.
-    return Promise.resolve([message, next])
-      .spread((message: any, next: Function) => {
-        // Resolves the handler based on the specified resolver.
-        let handler = this._messageHandlerResolver.getHandler(message);
-        // Wraps the handler into a promise to be sure to respect
-        // the chain.
-        return Promise.try(() => handler(message))
-          .then((result: any) => [message, next, result]);
-      })
-      // Calls the next middleware function.
-      .spread((message: any, next: Function, result: any) => {
-        return Promise.resolve(result)
-          .tap(() => next(message))
-          .then(() => result);
-      });
+    return Observable.fromPromise(
+      Promise.resolve([message, next])
+        .spread((message: any, next: (message: T) => any) => {
+          // Resolves the handler based on the specified resolver.
+          let handler = this._messageHandlerResolver.getHandler(message);
+          // Wraps the handler into a promise to be sure to respect
+          // the chain.
+          return Promise.try(() => handler(message))
+            .then((result: any) => [message, next, result]);
+        })
+        // Calls the next middleware function.
+        .spread((message: any, next: (message: T) => any, result: any) => {
+          return Promise.resolve(result)
+            .tap(() => next(message))
+            .then(() => result);
+        })
+    );
   }
 }

@@ -8,16 +8,16 @@
     "dist/"
   ],
   "scripts": {
+    "lint": "tslint --project tsconfig.json 'src/**/*.ts' -s node_modules/tslint-stylish -t stylish",
     "test": "npm run test:unit && npm run test:integration",
-    "test:travis": "npm run test:unit && npm run test:integration",
-    "test:unit": "mocha --compilers ts:ts-node/register --recursive test/unit",
-    "test:integration": "mocha --compilers ts:ts-node/register --recursive test/integration",
+    "test:unit": "TS_NODE_CACHE_DIRECTORY='./.ts-node-cache' mocha --require ./test/register.js --reporter dot 'test/unit/**/*.ts'",
+    "test:integration": "TS_NODE_CACHE_DIRECTORY='./.ts-node-cache' mocha --require ./test/register.js --reporter dot 'test/integration/**/*.ts'",
     "cz:init": "commitizen init cz-conventional-changelog --save-dev --save-exact",
     "package:lint": "ts-npm-lint"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tafax/js-bus.git"
+    "url": "git+ssh://git@github.com:tafax/js-bus.git"
   },
   "keywords": [
     "typescript",
@@ -27,10 +27,11 @@
   ],
   "author": "Matteo Tafani Alunno",
   "license": "MIT",
+  "homepage": "https://github.com/tafax/js-bus",
   "dependencies": {
     "bluebird": "^3.4.6",
     "lodash": "^4.17.2",
-    "rxjs": "^5.0.2"
+    "rxjs": "^5.5.2"
   },
   "devDependencies": {
     "@types/bluebird": "^3.0.35",
@@ -60,9 +61,11 @@
     "sinon-as-promised": "^4.0.2",
     "ts-node": "^1.7.0",
     "ts-npm-lint": "^0.1.0",
-    "tslint": "^4.0.0",
+    "tslint": "^5.6.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "tslint-stylish": "^2.1.0-beta",
     "typedoc": "^0.5.1",
-    "typescript": "^2.0.10"
+    "typescript": "2.4.0"
   },
   "config": {
     "commitizen": {

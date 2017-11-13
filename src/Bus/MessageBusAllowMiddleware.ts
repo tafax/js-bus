@@ -1,4 +1,5 @@
 
+import { Observable } from 'rxjs/Observable';
 import { MessageBusInterface } from './MessageBusInterface';
 import { MessageBusMiddlewareInterface } from '../Middleware/MessageBusMiddlewareInterface';
 
@@ -22,6 +23,21 @@ export class MessageBusAllowMiddleware implements MessageBusInterface {
   }
 
   /**
+   * Creates the function for the next middleware.
+   * @param {number} index The position of the middleware to create function for.
+   * @returns {Function} The function to call to execute the middleware.
+   */
+  private _functionForNextMiddleware<T>(index: number): (message: T) => Observable<any> {
+    if (!this._middlewares[index]) {
+      return () => { return Observable.of(undefined); };
+    }
+
+    let middleware = this._middlewares[index];
+
+    return (message: T) => middleware.handle(message, this._functionForNextMiddleware(index + 1));
+  }
+
+  /**
    * Appends a new middleware.
    * @param {MessageBusMiddlewareInterface} middleware The middleware to add at the bottom.
    */
@@ -38,25 +54,9 @@ export class MessageBusAllowMiddleware implements MessageBusInterface {
   }
 
   /**
-   * Creates the function for the next middleware.
-   * @param {number} index The position of the middleware to create function for.
-   * @returns {Function} The function to call to execute the middleware.
-   * @private
-   */
-  private _functionForNextMiddleware(index: number): Function {
-    if (!this._middlewares[index]) {
-      return () => {};
-    }
-
-    let middleware = this._middlewares[index];
-
-    return (message: any) => middleware.handle(message, this._functionForNextMiddleware(index + 1));
-  }
-
-  /**
    * @inheritDoc
    */
-  handle(message: any): any {
+  handle<T>(message: T): Observable<any> {
     return this._functionForNextMiddleware(0)(message);
   }
 

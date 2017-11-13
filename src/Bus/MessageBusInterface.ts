@@ -1,3 +1,6 @@
+
+import { Observable } from 'rxjs/Observable';
+
 /**
  * Base interface to describe a MessageBus object.
  */
@@ -5,8 +8,8 @@ export interface MessageBusInterface {
 
   /**
    * Handles the message passed to the bus.
-   * @param {any} message The message to handle with the bus.
-   * @returns {any} Returns the handled object.
+   * @param {T} message The message to handle with the bus.
+   * @returns {Observable<any>} Returns the handled object as a stream.
    */
-  handle(message: any): any;
+  handle<T>(message: T): Observable<any>;
 }

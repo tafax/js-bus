@@ -30,15 +30,18 @@ export class ObservableDelegatesMessageHandlerMiddleware extends AbstractDelegat
   /**
    * @inheritDoc
    */
-  handle(message: any, next: Function): any {
+  handle<T>(message: T, next: (message: T) => Observable<any>): Observable<any> {
     // It wraps the message with an observable.
     return this._wrapWithObservable(message)
       /**
        * Resolves the handler based on the specified resolver.
        * Wraps the handler into an observable to be sure to respect the chain.
        */
-      .map((message: any) => this._messageHandlerResolver.getHandler(message))
-      .flatMap((handler: Function) => this._wrapWithObservable(handler(message)))
-      .do(() => this._wrapWithObservable(next(message)));
+      .map((message: T) => this._messageHandlerResolver.getHandler(message))
+      .concatMap((handler: (message: T) => any) => this._wrapWithObservable(handler(message)))
+      .concatMap(
+        (result: any) => next(message),
+        (result: any) => result
+      );
   }
 }

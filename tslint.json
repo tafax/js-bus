@@ -1,0 +1,97 @@
+{
+  "rulesDirectory": [
+    "node_modules/tslint-eslint-rules/dist/rules"
+  ],
+  "rules": {
+    "no-unused-variable": true,
+    "no-duplicate-variable": true,
+    "no-reference": true,
+    "only-arrow-functions": [
+      true,
+      "allow-declarations"
+    ],
+    "no-any": false,
+    "align": [true, "parameters", "statements"],
+    "quotemark": [true, "single", "avoid-escape"],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "class-name": true,
+    "jsdoc-format": true,
+    "new-parens": true,
+    "no-consecutive-blank-lines": [true, 2],
+    "one-line": [
+      true,
+      "check-catch",
+      "check-finally",
+      "check-else",
+      "check-open-brace",
+      "check-whitespace"
+    ],
+    "one-variable-per-declaration": true,
+    "semicolon": [true, "always"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-operator",
+      "check-decl",
+      "check-module",
+      "check-type",
+      "check-preblock"
+    ],
+    "object-literal-key-quotes": [true, "as-needed"],
+    "typedef-whitespace":
+    [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
+      }
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "private-static-field",
+          "public-static-field",
+          "private-static-method",
+          "public-static-method",
+          "private-instance-field",
+          "protected-instance-field",
+          "public-instance-field",
+          "private-constructor",
+          "protected-constructor",
+          "public-constructor",
+          "private-instance-method",
+          "protected-instance-method",
+          "public-instance-method"
+        ]
+      }
+    ]
+  },
+  "eofline": true,
+  "max-classes-per-file": [true, 1],
+  "max-line-length": [true, 120],
+  "curly": true,
+  "no-arg": true,
+  "no-bitwise": true,
+  "no-construct": true,
+  "no-eval": true,
+  "no-invalid-this": true,
+  "no-shadowed-variable": true,
+  "import-spacing": true,
+  "completed-docs": [true, "classes", "methods", "properties"],
+  "jsdoc-format": true,
+  "no-unnecessary-initializer": true,
+  "align": [true, "parameters", "arguments", "statements"],
+  "class-name": true
+}

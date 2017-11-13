@@ -45,18 +45,26 @@ import { CustomError } from './utility/CustomError';
     ]);
   }
 
-  @test 'should execute the correct command handler and fulfill'() {
+  @test 'should execute the correct command handler and fulfill'(done) {
     let command = new GoodCommandForTest();
     (this.serviceLocatorMock as SinonStub).withArgs(PromiseGoodCommandHandlerForTest).returns(new PromiseGoodCommandHandlerForTest());
-    return this.commandBus.handle(command)
-      .should.be.fulfilled();
+    this.commandBus.handle(command)
+      .subscribe(
+        () => { done(); }
+      );
   }
 
-  @test 'should execute the correct command handler and reject'() {
+  @test 'should execute the correct command handler and reject'(done) {
     let command = new EvilCommandForTest();
     (this.serviceLocatorMock as SinonStub).withArgs(PromiseEvilCommandHandlerForTest).returns(new PromiseEvilCommandHandlerForTest());
-    return this.commandBus.handle(command)
-      .should.be.rejected(CustomError);
+    this.commandBus.handle(command)
+      .subscribe(
+        () => { throw new Error('it-should-be-never-called'); },
+        (error: CustomError) => {
+          error.should.be.instanceof(CustomError);
+          done();
+        }
+      );
   }
 }
 
