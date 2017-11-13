@@ -1,9 +1,0 @@
-"use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-__export(require('./Errors'));
-var ServiceLocatorAwareCallableResolver_1 = require('./ServiceLocatorAwareCallableResolver');
-exports.ServiceLocatorAwareCallableResolver = ServiceLocatorAwareCallableResolver_1.ServiceLocatorAwareCallableResolver;
-
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uL3NyYy9DYWxsYWJsZVJlc29sdmVyL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFDQSxpQkFBYyxVQUFVLENBQUMsRUFBQTtBQUV6QixvREFBb0QsdUNBQXVDLENBQUM7QUFBbkYsd0hBQW1GIiwiZmlsZSI6IkNhbGxhYmxlUmVzb2x2ZXIvaW5kZXguanMiLCJzb3VyY2VzQ29udGVudCI6WyJcbmV4cG9ydCAqIGZyb20gJy4vRXJyb3JzJztcbmV4cG9ydCB7IENhbGxhYmxlUmVzb2x2ZXJJbnRlcmZhY2UgfSBmcm9tICcuL0NhbGxhYmxlUmVzb2x2ZXJJbnRlcmZhY2UnO1xuZXhwb3J0IHsgU2VydmljZUxvY2F0b3JBd2FyZUNhbGxhYmxlUmVzb2x2ZXIgfSBmcm9tICcuL1NlcnZpY2VMb2NhdG9yQXdhcmVDYWxsYWJsZVJlc29sdmVyJztcbiJdfQ==

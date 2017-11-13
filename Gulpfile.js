@@ -86,7 +86,7 @@ gulp.task('default', function() {
 gulp.task('release', function() {
   return runSequence(
     'default',
-    'typedoc',
+    //'typedoc',
     'bump',
     'commit',
     'tag'
