@@ -12,6 +12,7 @@
     "experimentalDecorators": true,
     "target": "es2015",
     "sourceMap": true,
+    "noEmitOnError": true,
     "lib": [
       "es6"
     ]

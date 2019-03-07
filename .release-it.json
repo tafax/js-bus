@@ -1,0 +1,17 @@
+{
+  "increment": "conventional:angular",
+  "scripts": {
+    "beforeStart": "yarn build:release",
+    "afterRelease": "echo Successfully released ${name} v${version} to ${repo.repository}."
+  },
+  "git": {
+    "requireCleanWorkingDir": true,
+    "commitMessage": "Release ${version}",
+    "tagName": "v${version}",
+    "tagAnnotation": "Release v${version}"
+  },
+  "github": {
+    "release": true,
+    "releaseName": "v${version}"
+  }
+}

@@ -21,3 +21,10 @@ before_script:
 
 script:
  - travis_wait 30 yarn test
+
+deploy:
+  provider: script
+  script: scripts/publish.sh
+  skip_cleanup: true
+  on:
+    branch: master
