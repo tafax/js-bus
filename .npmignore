@@ -1,6 +1,7 @@
 .idea
 .nvmrc
 .ts-node-cache
+npm-debug.log
 
 Gulpfile.js
 bower.json

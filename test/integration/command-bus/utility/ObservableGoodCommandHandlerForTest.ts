@@ -1,10 +1,10 @@
 
-import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { GoodCommandForTest } from './GoodCommandForTest';
 
 export class ObservableGoodCommandHandlerForTest {
   handle(command: GoodCommandForTest) {
     command.checkProperty.should.be.eql('alright!');
-    return Observable.of();
+    return of();
   }
 }

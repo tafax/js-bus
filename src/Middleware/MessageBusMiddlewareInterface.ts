@@ -1,5 +1,5 @@
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 /**
  * Base interface to represents middlewares for the bus.

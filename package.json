@@ -9,9 +9,9 @@
   ],
   "scripts": {
     "lint": "tslint --project tsconfig.json 'src/**/*.ts' -s node_modules/tslint-stylish -t stylish",
-    "test": "npm run test:unit && npm run test:integration",
-    "test:unit": "TS_NODE_CACHE_DIRECTORY='./.ts-node-cache' mocha --require ./test/register.js --reporter dot 'test/unit/**/*.ts'",
-    "test:integration": "TS_NODE_CACHE_DIRECTORY='./.ts-node-cache' mocha --require ./test/register.js --reporter dot 'test/integration/**/*.ts'",
+    "test": "yarn run test:unit && yarn run test:integration",
+    "test:unit": "TS_NODE_CACHE_DIRECTORY='./.ts-node-cache' _mocha --opts test/mocha.opts 'test/unit/**/*.ts'",
+    "test:integration": "TS_NODE_CACHE_DIRECTORY='./.ts-node-cache' _mocha --opts test/mocha.opts 'test/integration/**/*.ts'",
     "cz:init": "commitizen init cz-conventional-changelog --save-dev --save-exact",
     "package:lint": "ts-npm-lint"
   },
@@ -31,7 +31,7 @@
   "dependencies": {
     "bluebird": "^3.4.6",
     "lodash": "^4.17.2",
-    "rxjs": "^5.5.2"
+    "rxjs": "~6.3.3"
   },
   "devDependencies": {
     "@types/bluebird": "^3.0.35",

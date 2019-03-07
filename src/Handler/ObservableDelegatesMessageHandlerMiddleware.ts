@@ -1,7 +1,6 @@
 
-import * as Bluebird from 'bluebird';
-
-import { Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { concatMap, map } from 'rxjs/operators';
 import { AbstractDelegatesToMessageHandlerMiddleware } from './AbstractDelegatesToMessageHandlerMiddleware';
 
 /**
@@ -20,11 +19,11 @@ export class ObservableDelegatesMessageHandlerMiddleware extends AbstractDelegat
       return value;
     }
 
-    if ((value instanceof Promise) || value instanceof Bluebird) {
-      return Observable.fromPromise(value as Promise<any>);
+    if (value instanceof Promise) {
+      return from(value as Promise<any>);
     }
 
-    return Observable.of(value);
+    return of(value);
   }
 
   /**
@@ -33,15 +32,19 @@ export class ObservableDelegatesMessageHandlerMiddleware extends AbstractDelegat
   handle<T>(message: T, next: (message: T) => Observable<any>): Observable<any> {
     // It wraps the message with an observable.
     return this._wrapWithObservable(message)
-      /**
-       * Resolves the handler based on the specified resolver.
-       * Wraps the handler into an observable to be sure to respect the chain.
-       */
-      .map((message: T) => this._messageHandlerResolver.getHandler(message))
-      .concatMap((handler: (message: T) => any) => this._wrapWithObservable(handler(message)))
-      .concatMap(
-        (result: any) => next(message),
-        (result: any) => result
+      .pipe(
+        /**
+         * Resolves the handler based on the specified resolver.
+         * Wraps the handler into an observable to be sure to respect the chain.
+         */
+        map((message: T) => this._messageHandlerResolver.getHandler(message)),
+        concatMap((handler: (message: T) => any) => this._wrapWithObservable(handler(message))),
+        concatMap(
+          (result: any) => next(message)
+            .pipe(
+              map(() => result)
+            )
+        )
       );
   }
 }

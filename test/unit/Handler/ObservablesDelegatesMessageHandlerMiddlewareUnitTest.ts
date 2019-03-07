@@ -4,8 +4,7 @@ import 'should';
 import * as sinon from 'sinon';
 import { SinonStub } from 'sinon';
 import 'sinon-as-promised';
-import { Observable } from 'rxjs';
-import * as Bluebird from 'bluebird';
+import { Observable, of } from 'rxjs';
 
 import { ObservableDelegatesMessageHandlerMiddleware } from '../../../src/Handler/ObservableDelegatesMessageHandlerMiddleware';
 import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/MessageHandlerResolverInterface';
@@ -31,8 +30,8 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     let handler = sinon.stub();
     (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
 
-    (handler.withArgs(message) as SinonStub).returns(Observable.of('handler-resolved'));
-    (next.withArgs(message) as SinonStub).returns(Observable.of('next-resolved'));
+    (handler.withArgs(message) as SinonStub).returns(of('handler-resolved'));
+    (next.withArgs(message) as SinonStub).returns(of('next-resolved'));
 
     return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as Observable<any>)
       .subscribe(() => {
@@ -50,7 +49,7 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
 
     (handler.withArgs(message) as SinonStub).returns('handler-resolved');
-    (next.withArgs(message) as SinonStub).returns('next-resolved');
+    (next.withArgs(message) as SinonStub).returns(of('next-resolved'));
 
     return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as Observable<any>)
       .subscribe(() => {
@@ -68,25 +67,7 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
 
     (handler.withArgs(message) as SinonStub).returns(Promise.resolve('handler-resolved'));
-    (next.withArgs(message) as SinonStub).returns(Promise.resolve('next-resolved'));
-
-    return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as Observable<any>)
-      .subscribe(() => {
-        handler.calledWith(message).should.be.true();
-        next.calledWith(message).should.be.true();
-      });
-  }
-
-  @test 'should resolve the handler if Bluebird promise'() {
-
-    let message = 'message';
-    let next = sinon.stub();
-
-    let handler = sinon.stub();
-    (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
-
-    (handler.withArgs(message) as SinonStub).returns(Bluebird.resolve('handler-resolved'));
-    (next.withArgs(message) as SinonStub).returns(Bluebird.resolve('next-resolved'));
+    (next.withArgs(message) as SinonStub).returns(of('next-resolved'));
 
     return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as Observable<any>)
       .subscribe(() => {
@@ -103,8 +84,8 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     let handler = sinon.stub();
     (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
 
-    (handler.withArgs(message) as SinonStub).returns(Observable.of('handler-resolved'));
-    (next.withArgs(message) as SinonStub).returns(Observable.of('next-resolved'));
+    (handler.withArgs(message) as SinonStub).returns(of('handler-resolved'));
+    (next.withArgs(message) as SinonStub).returns(of('next-resolved'));
 
     return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as Observable<any>)
       .subscribe((result: any) => {
@@ -144,27 +125,7 @@ import { MessageHandlerResolverInterface } from '../../../src/Handler/Resolver/M
     (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
 
     (handler.withArgs(message) as SinonStub).returns(Promise.resolve('handler-resolved'));
-    (next.withArgs(message) as SinonStub).returns(Promise.resolve('handler-resolved'));
-
-    return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as Observable<any>)
-      .subscribe((result: any) => {
-        result.should.be.eql('handler-resolved');
-
-        handler.calledWith(message).should.be.true();
-        next.calledWith(message).should.be.true();
-      });
-  }
-
-  @test 'should resolve the handler if Bluebird promise and return the handle value'() {
-
-    let message = 'message';
-    let next = sinon.stub();
-
-    let handler = sinon.stub();
-    (this.messageHandlerResolverMock.getHandler as SinonStub).returns(handler);
-
-    (handler.withArgs(message) as SinonStub).returns(Bluebird.resolve('handler-resolved'));
-    (next.withArgs(message) as SinonStub).returns(Bluebird.resolve('handler-resolved'));
+    (next.withArgs(message) as SinonStub).returns(of('handler-resolved'));
 
     return (this.delegatesToMessageHandlerMiddleware.handle(message, next) as Observable<any>)
       .subscribe((result: any) => {

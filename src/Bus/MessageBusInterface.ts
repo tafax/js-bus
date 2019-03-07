@@ -1,5 +1,5 @@
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 /**
  * Base interface to describe a MessageBus object.

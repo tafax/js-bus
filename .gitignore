@@ -7,3 +7,6 @@ node_modules
 
 # Caches
 .ts-node-cache
+
+# Misc
+npm-debug.log

@@ -1,5 +1,5 @@
 
-import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
 import { MessageBusInterface } from './MessageBusInterface';
 import { MessageBusMiddlewareInterface } from '../Middleware/MessageBusMiddlewareInterface';
 
@@ -29,7 +29,7 @@ export class MessageBusAllowMiddleware implements MessageBusInterface {
    */
   private _functionForNextMiddleware<T>(index: number): (message: T) => Observable<any> {
     if (!this._middlewares[index]) {
-      return () => { return Observable.of(undefined); };
+      return () => { return of(undefined); };
     }
 
     let middleware = this._middlewares[index];

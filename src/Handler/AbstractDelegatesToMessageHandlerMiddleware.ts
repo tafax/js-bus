@@ -1,5 +1,5 @@
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { MessageBusMiddlewareInterface } from '../Middleware/MessageBusMiddlewareInterface';
 import { MessageHandlerResolverInterface } from './Resolver/MessageHandlerResolverInterface';
 
