@@ -1,2 +1,0 @@
-
-export { MessageBusMiddlewareInterface } from './MessageBusMiddlewareInterface';

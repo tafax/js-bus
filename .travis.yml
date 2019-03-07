@@ -2,7 +2,7 @@ sudo: required
 dist: trusty
 
 language: node_js
-node_js: '6.5.0'
+node_js: '10.15.2'
 
 cache:
   yarn: true
@@ -14,7 +14,7 @@ before_install:
  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
 
 install:
- - $HOME/.yarn/bin/yarn install
+ - $HOME/.yarn/bin/yarn
 
 before_script:
  - export DISPLAY=:99.0
