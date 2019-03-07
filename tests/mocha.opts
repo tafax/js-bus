@@ -1,0 +1,3 @@
+--ui mocha-typescript
+--require ./tests/register.js
+--reporter dot

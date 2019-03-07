@@ -7,6 +7,8 @@ node_modules
 
 # Caches
 .ts-node-cache
+.nyc_output
+coverage
 
 # Misc
 npm-debug.log

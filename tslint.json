@@ -1,97 +1,69 @@
 {
-  "rulesDirectory": [
-    "node_modules/tslint-eslint-rules/dist/rules"
-  ],
   "rules": {
-    "no-unused-variable": true,
-    "no-duplicate-variable": true,
-    "no-reference": true,
-    "only-arrow-functions": [
-      true,
-      "allow-declarations"
-    ],
-    "no-any": false,
-    "align": [true, "parameters", "statements"],
-    "quotemark": [true, "single", "avoid-escape"],
-    "arrow-parens": [true, "ban-single-arg-parens"],
+    "arrow-return-shorthand": true,
+    "callable-types": true,
     "class-name": true,
-    "jsdoc-format": true,
-    "new-parens": true,
-    "no-consecutive-blank-lines": [true, 2],
-    "one-line": [
-      true,
-      "check-catch",
-      "check-finally",
-      "check-else",
-      "check-open-brace",
-      "check-whitespace"
-    ],
-    "one-variable-per-declaration": true,
-    "semicolon": [true, "always"],
-    "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"],
-    "whitespace": [
-      true,
-      "check-branch",
-      "check-operator",
-      "check-decl",
-      "check-module",
-      "check-type",
-      "check-preblock"
-    ],
-    "object-literal-key-quotes": [true, "as-needed"],
-    "typedef-whitespace":
-    [
+    "deprecation": [
       true,
       {
-        "call-signature": "nospace",
-        "index-signature": "nospace",
-        "parameter": "nospace",
-        "property-declaration": "nospace",
-        "variable-declaration": "nospace"
-      },
-      {
-        "call-signature": "onespace",
-        "index-signature": "onespace",
-        "parameter": "onespace",
-        "property-declaration": "onespace",
-        "variable-declaration": "onespace"
+        "severity": "warn"
       }
     ],
+    "forin": true,
+    "import-blacklist": [
+      true,
+      "rxjs/Rx"
+    ],
+    "interface-over-type-literal": true,
+    "member-access": false,
     "member-ordering": [
       true,
       {
         "order": [
-          "private-static-field",
-          "public-static-field",
-          "private-static-method",
-          "public-static-method",
-          "private-instance-field",
-          "protected-instance-field",
-          "public-instance-field",
-          "private-constructor",
-          "protected-constructor",
-          "public-constructor",
-          "private-instance-method",
-          "protected-instance-method",
-          "public-instance-method"
+          "static-field",
+          "instance-field",
+          "static-method",
+          "instance-method"
         ]
       }
-    ]
-  },
-  "eofline": true,
-  "max-classes-per-file": [true, 1],
-  "max-line-length": [true, 120],
-  "curly": true,
-  "no-arg": true,
-  "no-bitwise": true,
-  "no-construct": true,
-  "no-eval": true,
-  "no-invalid-this": true,
-  "no-shadowed-variable": true,
-  "import-spacing": true,
-  "completed-docs": [true, "classes", "methods", "properties"],
-  "jsdoc-format": true,
-  "no-unnecessary-initializer": true,
-  "align": [true, "parameters", "arguments", "statements"],
-  "class-name": true
+    ],
+    "no-arg": true,
+    "no-bitwise": true,
+    "no-console": [
+      true,
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "no-construct": true,
+    "no-debugger": true,
+    "no-duplicate-super": true,
+    "no-empty": false,
+    "no-empty-interface": true,
+    "no-eval": true,
+    "no-inferrable-types": [
+      true,
+      "ignore-params",
+      "ignore-properties"
+    ],
+    "no-misused-new": true,
+    "no-non-null-assertion": true,
+    "no-shadowed-variable": true,
+    "no-string-literal": false,
+    "no-string-throw": true,
+    "no-switch-case-fall-through": true,
+    "no-unnecessary-initializer": true,
+    "no-unused-expression": true,
+    "no-use-before-declare": true,
+    "no-var-keyword": true,
+    "object-literal-sort-keys": false,
+    "prefer-const": true,
+    "radix": true,
+    "triple-equals": [
+      true,
+      "allow-null-check"
+    ],
+    "unified-signatures": true,
+    "variable-name": false
+  }
 }
