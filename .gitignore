@@ -1,6 +1,8 @@
 
 # Project
 .idea
+dist
+.env
 
 # Node environment
 node_modules

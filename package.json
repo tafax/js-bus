@@ -8,9 +8,11 @@
     "dist/"
   ],
   "scripts": {
+    "build": "rimraf ./dist && tsc -p tsconfig.json",
+    "build:release": "yarn lint && yarn test && yarn build",
     "lint": "tslint --project tsconfig.json 'src/**/*.ts' -s node_modules/tslint-stylish -t stylish",
     "test": "TS_NODE_CACHE_DIRECTORY='./.ts-node-cache' nyc ./node_modules/.bin/_mocha --opts tests/mocha.opts 'tests/**/*.tests.ts'",
-    "package:lint": "ts-npm-lint"
+    "npm-cli-login": "npm-cli-login"
   },
   "repository": {
     "type": "git",
@@ -35,7 +37,10 @@
     "cz-conventional-changelog": "2.1.0",
     "mocha": "^6.0.2",
     "mocha-typescript": "^1.1.17",
+    "npm-cli-login": "^0.1.1",
     "nyc": "^13.3.0",
+    "release-it": "^10.3.1",
+    "rimraf": "^2.6.3",
     "ts-node": "^8.0.2",
     "tsconfig-paths": "^3.8.0",
     "tslint": "^5.13.1",
