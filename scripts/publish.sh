@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]] || [[ $TRAVIS_BRANCH != "devel" ]]
+if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]] || [[ $TRAVIS_BRANCH != "master" ]]
     then
         echo "This script only works for MASTER and for non-CRON tasks..."
         exit 0
