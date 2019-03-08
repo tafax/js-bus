@@ -12,6 +12,7 @@
     "build:release": "yarn lint && yarn test && yarn build",
     "lint": "tslint --project tsconfig.json 'src/**/*.ts' -s node_modules/tslint-stylish -t stylish",
     "test": "nyc ./node_modules/.bin/_mocha --opts tests/mocha.opts 'tests/**/*.tests.ts'",
+    "test:ci": "yarn test && nyc report --reporter=text-lcov | coveralls",
     "npm-cli-login": "npm-cli-login"
   },
   "repository": {
@@ -34,6 +35,7 @@
     "@types/chai": "^4.1.7",
     "@types/node": "^11.10.4",
     "chai": "^4.2.0",
+    "coveralls": "^3.0.3",
     "cz-conventional-changelog": "2.1.0",
     "mocha": "^6.0.2",
     "mocha-typescript": "^1.1.17",
