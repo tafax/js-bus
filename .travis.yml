@@ -20,7 +20,7 @@ before_script:
  - export DISPLAY=:99.0
 
 script:
- - travis_wait 30 yarn test
+ - travis_wait 30 yarn test:ci
 
 deploy:
   provider: script

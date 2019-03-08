@@ -1,5 +1,6 @@
 # jsBus
 [![Build Status](https://travis-ci.org/tafax/js-bus.svg?branch=master)](https://travis-ci.org/tafax/js-bus)
+[![Coverage Status](https://coveralls.io/repos/github/tafax/js-bus/badge.svg?branch=master)](https://coveralls.io/github/tafax/js-bus?branch=master)
 
 This is an experimental library inspired by [MessageBus](https://github.com/SimpleBus/MessageBus) for PHP.
 
