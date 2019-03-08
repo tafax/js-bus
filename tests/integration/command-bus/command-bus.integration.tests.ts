@@ -1,17 +1,17 @@
 
 import { suite, test, Mock, IMock, Times } from '@js-bus/test';
+import { of } from 'rxjs';
 import { MessageBusAllowMiddleware } from '../../../src/lib/bus/message-bus-allow-middleware';
 import { ServiceLocatorAwareCallableResolver } from '../../../src/lib/callable-resolver/service-locator-aware.callable-resolver';
 import { MessageHandlingCollection } from '../../../src/lib/collection/message-handling.collection';
 import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/extractor/function-constructor.message-type-extractor';
 import { ObservableDelegatesMessageHandlerMiddleware } from '../../../src/lib/handler/observable-delegates-message-handler.middleware';
 import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.handler-resolver';
-
-import { GoodCommandHandlerForTest } from './utility/good-command-handler-for-test';
-import { GoodCommandForTest } from './utility/good-command-for-test';
-import { EviCommandForTest } from './utility/evi-command-for-test';
-import { EvilCommandHandlerForTest } from './utility/evil-command-handler-for-test';
-import { CustomError } from './utility/custom.error';
+import { CustomError } from '../../fixtures/custom.error';
+import { EviCommandForTest } from '../../fixtures/evi-command-for-test';
+import { EvilCommandHandlerForTest } from '../../fixtures/evil-command-handler-for-test';
+import { GoodCommandForTest } from '../../fixtures/good-command-for-test';
+import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-for-test';
 
 @suite class CommandBusIntegrationTests {
 
@@ -41,7 +41,7 @@ import { CustomError } from './utility/custom.error';
     ]);
   }
 
-  @test 'should execute the correct command handler and fulfill'() {
+  @test 'should execute the correct command handler'() {
 
     const command = new GoodCommandForTest();
 
@@ -58,7 +58,35 @@ import { CustomError } from './utility/custom.error';
       );
   }
 
-  @test 'should execute the correct command handler and reject'() {
+  @test 'should execute the correct command handler without subscribing'() {
+
+    const command = new GoodCommandForTest();
+
+    const commandHandlerMock = Mock.ofType(GoodCommandHandlerForTest);
+
+    commandHandlerMock
+      .setup(x => x.handle(command))
+      .returns(() => of(undefined))
+      .verifiable(Times.once());
+
+    this.serviceLocatorMock
+      .setup(x => x(GoodCommandHandlerForTest))
+      .returns(() => commandHandlerMock.object)
+      .verifiable(Times.once());
+
+    const execution$ = this.commandBus.handle(command);
+
+    this.serviceLocatorMock.verifyAll();
+    commandHandlerMock.verifyAll();
+
+    return execution$
+      .subscribe(() => {
+        this.serviceLocatorMock.verifyAll();
+        commandHandlerMock.verifyAll();
+      });
+  }
+
+  @test 'should execute the correct command handler and throws error'() {
 
     const command = new EviCommandForTest();
 
@@ -70,7 +98,11 @@ import { CustomError } from './utility/custom.error';
     return this.commandBus.handle(command)
       .subscribe(
         () => { throw new Error('should-not-be-called'); },
-        (error: Error) => { error.should.be.instanceof(CustomError); }
+        (error: Error) => {
+          error.should.be.instanceof(CustomError);
+
+          this.serviceLocatorMock.verifyAll();
+        }
       );
   }
 }

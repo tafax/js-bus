@@ -131,4 +131,87 @@ import { MessageBusMiddlewareInterface } from '../../../src/lib/middleware/messa
       });
   }
 
+  @test 'should handle the message calling all middlewares without subscribing'() {
+
+    this.middleware1Mock
+      .setup(x => x.handle('message', It.isAny()))
+      .returns(
+        (message: string, next: Function) => of(undefined)
+          .pipe(concatMap(() => next(message)))
+      )
+      .verifiable(Times.once());
+
+    this.middleware2Mock
+      .setup(x => x.handle('message', It.isAny()))
+      .returns(
+        (message: string, next: Function) => of(undefined)
+          .pipe(concatMap(() => next(message)))
+      )
+      .verifiable(Times.once());
+
+    this.middleware3Mock
+      .setup(x => x.handle('message', It.isAny()))
+      .returns(
+        (message: string, next: Function) => of(undefined)
+          .pipe(
+            concatMap(() => next(message)),
+            map(() => 'result')
+          )
+      )
+      .verifiable(Times.once());
+
+    const execution$ = this.messageBusFull.handle('message');
+
+    this.middleware1Mock.verifyAll();
+    this.middleware2Mock.verifyAll();
+    this.middleware3Mock.verifyAll();
+
+    return execution$.subscribe(
+      (result: string) => {
+        result.should.be.eql('result');
+
+        this.middleware1Mock.verifyAll();
+        this.middleware2Mock.verifyAll();
+        this.middleware3Mock.verifyAll();
+      }
+    );
+  }
+
+  @test 'should handle the message calling all middlewares every time a message is executed'() {
+
+    this.middleware1Mock
+      .setup(x => x.handle('message', It.isAny()))
+      .returns(
+        (message: string, next: Function) => of(undefined)
+          .pipe(concatMap(() => next(message)))
+      )
+      .verifiable(Times.exactly(2));
+
+    this.middleware2Mock
+      .setup(x => x.handle('message', It.isAny()))
+      .returns(
+        (message: string, next: Function) => of(undefined)
+          .pipe(concatMap(() => next(message)))
+      )
+      .verifiable(Times.exactly(2));
+
+    this.middleware3Mock
+      .setup(x => x.handle('message', It.isAny()))
+      .returns(
+        (message: string, next: Function) => of(undefined)
+          .pipe(
+            concatMap(() => next(message)),
+            map(() => 'result')
+          )
+      )
+      .verifiable(Times.exactly(2));
+
+    this.messageBusFull.handle('message');
+    this.messageBusFull.handle('message');
+
+    this.middleware1Mock.verifyAll();
+    this.middleware2Mock.verifyAll();
+    this.middleware3Mock.verifyAll();
+  }
+
 }

@@ -8,9 +8,12 @@ if [[ "$TRAVIS_EVENT_TYPE" == "cron" ]] || [[ $TRAVIS_BRANCH != "master" ]]
         exit 0
 fi
 
+# Makes sure Travis CI is able to push to github.
 git remote set-url origin https://tafax:$GITHUB_TOKEN@github.com/tafax/js-bus.git
 git checkout master
 git pull --tags origin master
 
+# Allows to login to NPM using environment variables.
 ./node_modules/.bin/npm-cli-login
-./node_modules/.bin/release-it --non-interactive --verbose 0.0.5
+# Release a new version and publish to NPM.
+./node_modules/.bin/release-it --non-interactive --verbose
