@@ -6,6 +6,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/tafax/js-bus.svg)](https://greenkeeper.io/)
 [![CodeFactor](https://www.codefactor.io/repository/github/tafax/js-bus/badge)](https://www.codefactor.io/repository/github/tafax/js-bus)
 [![BCH compliance](https://bettercodehub.com/edge/badge/tafax/js-bus?branch=devel)](https://bettercodehub.com/)
+[![License](https://img.shields.io/npm/l/js-bus.svg)](https://www.npmjs.com/package/js-bus)
 
 This is an experimental library inspired by [MessageBus](https://github.com/SimpleBus/MessageBus) for PHP.
 
