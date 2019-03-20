@@ -3,6 +3,7 @@
 .idea
 dist
 .env
+out-tsc
 
 # Node environment
 node_modules

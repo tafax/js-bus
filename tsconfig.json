@@ -1,20 +1,30 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "./dist",
-    "declaration": true,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
+    "module": "esnext",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es2018"
+    ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es2015",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
-    "noEmitOnError": true,
-    "lib": [
-      "es6"
+    "stripInternal": true,
+    "declaration": true,
+    "declarationMap": true,
+    "declarationDir": "./dist/types",
+    "outDir": "./dist/esm5",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin",
+        "alwaysShowRuleFailuresAsWarnings": false
+      }
     ]
   },
   "include": [
