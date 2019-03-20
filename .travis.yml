@@ -11,7 +11,7 @@ cache:
     - .ts-node-cache
 
 before_install:
- - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.13.0
+ - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.15.2
 
 install:
  - $HOME/.yarn/bin/yarn
