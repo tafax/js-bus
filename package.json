@@ -2,18 +2,32 @@
   "name": "js-bus",
   "version": "0.0.5",
   "description": "jsBus is a JavaScript library to handle a simple and extendable message bus.",
-  "main": "dist/public_api.js",
-  "typings": "dist/public_api.d.ts",
+  "module": "./dist/fesm5/js-bus.js",
+  "es2015": "./dist/fesm2015/js-bus.js",
+  "esm5": "./dist/esm5/js-bus.js",
+  "esm2015": "./dist/esm2015/js-bus.js",
+  "fesm5": "./dist/fesm5/js-bus.js",
+  "fesm2015": "./dist/fesm2015/js-bus.js",
+  "main": "./dist/bundles/js-bus.umd.js",
+  "typings": "./dist/types/public_api.d.ts",
+  "sideEffects": false,
   "files": [
     "dist/"
   ],
   "scripts": {
-    "build": "rimraf ./dist && tsc -p tsconfig.json",
-    "build:release": "yarn lint && yarn test && yarn build",
+    "---------------- NPM BINARY WRAPPERS ----------------": "",
+    "npm-cli-login": "npm-cli-login",
+    "webpack": "webpack",
+    "---------------- UTILITY ----------------": "",
+    "clean": "shx rm -rf dist && shx echo Done",
     "lint": "tslint --project tsconfig.json 'src/**/*.ts' -s node_modules/tslint-stylish -t stylish",
+    "---------------- BUILDING ----------------": "",
+    "build": "yarn clean && tsc && tsc --target es2018 --outDir ./dist/esm2015",
+    "compile": "rollup -c ./compile/rollup.config.js --environment NODE_ENV:production",
+    "---------------- TESTING ----------------": "",
     "test": "nyc ./node_modules/.bin/_mocha --opts tests/mocha.opts 'tests/**/*.tests.ts'",
-    "test:ci": "yarn test && nyc report --reporter=text-lcov | coveralls",
-    "npm-cli-login": "npm-cli-login"
+    "---------------- CI ----------------": "",
+    "test:ci": "yarn test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -30,12 +44,14 @@
   "homepage": "https://github.com/tafax/js-bus",
   "dependencies": {},
   "peerDependencies": {
-    "rxjs": "^6.0.0"
+    "rxjs": "^6.0.0",
+    "tslib": "^1.9.3"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
     "@types/node": "^11.10.4",
     "chai": "^4.2.0",
+    "commander": "^2.19.0",
     "coveralls": "^3.0.3",
     "cz-conventional-changelog": "2.1.0",
     "mocha": "^6.0.2",
@@ -43,13 +59,22 @@
     "npm-cli-login": "^0.1.1",
     "nyc": "^13.3.0",
     "release-it": "^10.3.1",
-    "rimraf": "^2.6.3",
+    "rollup": "^1.6.0",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-uglify": "^6.0.2",
+    "shx": "^0.3.2",
     "ts-node": "^8.0.2",
     "tsconfig-paths": "^3.8.0",
     "tslint": "^5.13.1",
     "tslint-stylish": "^2.1.0",
     "typemoq": "^2.1.0",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.3.3333",
+    "typescript-tslint-plugin": "^0.3.1",
+    "webpack-config-utils": "^2.3.1"
   },
   "nyc": {
     "include": [

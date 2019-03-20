@@ -1,7 +1,7 @@
 {
   "increment": "conventional:angular",
   "scripts": {
-    "beforeStart": "yarn build:release",
+    "beforeStart": "yarn build && yarn compile",
     "afterRelease": "echo Successfully released ${name} v${version} to ${repo.repository}."
   },
   "git": {

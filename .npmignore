@@ -4,11 +4,14 @@
 .release-it.json
 .travis.yml
 .nyc_output
-.ts-node-cache
+.env.dist
+.gitignore
 
 npm-debug.log
+compile
 coverage
 src
+scripts
 tests
 
 tslint.json
