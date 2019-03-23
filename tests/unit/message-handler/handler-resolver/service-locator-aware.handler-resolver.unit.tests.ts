@@ -1,16 +1,16 @@
 
 import { suite, test, IMock, Mock, Times, It } from '@js-bus/test';
-import { ServiceLocatorAwareCallableResolver } from '../../../src/lib/callable-resolver/service-locator-aware.callable-resolver';
-import { JsBusError } from '../../../src/lib/errors/js-bus.error';
+import { JsBusError } from '../../../../src/lib/errors/js-bus.error';
+import { ServiceLocatorAwareHandlerResolver } from '../../../../src/lib/message-handler/handler-resolver/service-locator-aware.handler-resolver';
 
-@suite class ServiceLocatorAwareCallableResolverUnitTests {
+@suite class ServiceLocatorAwareHandlerResolverUnitTests {
 
-  private resolver: ServiceLocatorAwareCallableResolver;
+  private resolver: ServiceLocatorAwareHandlerResolver;
   private serviceLocatorMock: IMock<Function>;
 
   before() {
     this.serviceLocatorMock = Mock.ofType<Function>();
-    this.resolver = new ServiceLocatorAwareCallableResolver(this.serviceLocatorMock.object);
+    this.resolver = new ServiceLocatorAwareHandlerResolver(this.serviceLocatorMock.object);
   }
 
   @test 'should resolve a string'() {
@@ -23,7 +23,7 @@ import { JsBusError } from '../../../src/lib/errors/js-bus.error';
       .returns(() => service)
       .verifiable(Times.once());
 
-    this.resolver.resolve(identifier).toString().should.be.eql(service.handle.bind(service).toString());
+    this.resolver.resolve(identifier).should.be.eql(service);
 
     this.serviceLocatorMock.verifyAll();
   }
@@ -40,7 +40,7 @@ import { JsBusError } from '../../../src/lib/errors/js-bus.error';
       .returns(() => service)
       .verifiable(Times.once());
 
-    this.resolver.resolve(identifier).toString().should.be.eql(service.handle.bind(service).toString());
+    this.resolver.resolve(identifier).should.be.eql(service);
 
     this.serviceLocatorMock.verifyAll();
   }
@@ -55,7 +55,7 @@ import { JsBusError } from '../../../src/lib/errors/js-bus.error';
       .returns(() => service)
       .verifiable(Times.never());
 
-    this.resolver.resolve(service).toString().should.be.eql(service.handle.bind(service).toString());
+    this.resolver.resolve(service).should.be.eql(service);
 
     this.serviceLocatorMock.verifyAll();
   }

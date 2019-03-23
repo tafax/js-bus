@@ -16,4 +16,4 @@ git pull --tags origin master
 # Allows to login to NPM using environment variables.
 ./node_modules/.bin/npm-cli-login
 # Release a new version and publish to NPM.
-./node_modules/.bin/release-it --non-interactive --verbose 0.2.0
+./node_modules/.bin/release-it --non-interactive --verbose

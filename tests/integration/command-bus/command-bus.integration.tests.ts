@@ -1,12 +1,12 @@
 
 import { suite, test, Mock, IMock, Times } from '@js-bus/test';
 import { of } from 'rxjs';
-import { MessageBusAllowMiddleware } from '../../../src/lib/bus/message-bus-allow-middleware';
-import { ServiceLocatorAwareCallableResolver } from '../../../src/lib/callable-resolver/service-locator-aware.callable-resolver';
-import { MessageHandlingCollection } from '../../../src/lib/collection/message-handling.collection';
-import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/extractor/function-constructor.message-type-extractor';
-import { ObservableDelegatesMessageHandlerMiddleware } from '../../../src/lib/handler/observable-delegates-message-handler.middleware';
-import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.handler-resolver';
+import { MessageBus } from '../../../src/lib/bus/message-bus';
+import { ServiceLocatorAwareHandlerResolver } from '../../../src/lib/message-handler/handler-resolver/service-locator-aware.handler-resolver';
+import { ClassMapHandlerMapper } from '../../../src/lib/message-handler/mapper/class-map/class-map.handler-mapper';
+import { MessageHandlingCollection } from '../../../src/lib/message-handler/mapper/class-map/collection/message-handling.collection';
+import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/message-handler/mapper/class-map/extractor/function-constructor.message-type-extractor';
+import { MessageHandlerMiddleware } from '../../../src/lib/message-handler/message-handler.middleware';
 import { CustomError } from '../../fixtures/custom.error';
 import { EviCommandForTest } from '../../fixtures/evi-command-for-test';
 import { EvilCommandHandlerForTest } from '../../fixtures/evil-command-handler-for-test';
@@ -15,7 +15,7 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
 
 @suite class CommandBusIntegrationTests {
 
-  private commandBus: MessageBusAllowMiddleware;
+  private commandBus: MessageBus;
   private serviceLocatorMock: IMock<Function>;
 
   before() {
@@ -28,16 +28,16 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
     ]);
 
     const functionExtractor = new FunctionConstructorMessageTypeExtractor();
-    const serviceLocatorResolver = new ServiceLocatorAwareCallableResolver(this.serviceLocatorMock.object);
+    const serviceLocatorResolver = new ServiceLocatorAwareHandlerResolver(this.serviceLocatorMock.object);
 
-    const classMapHandlerResolver = new ClassMapHandlerResolver(
+    const classMapHandlerResolver = new ClassMapHandlerMapper(
       messageHandlingCollection,
       serviceLocatorResolver,
       functionExtractor
     );
 
-    this.commandBus = new MessageBusAllowMiddleware([
-      new ObservableDelegatesMessageHandlerMiddleware(classMapHandlerResolver)
+    this.commandBus = new MessageBus([
+      new MessageHandlerMiddleware(classMapHandlerResolver)
     ]);
   }
 

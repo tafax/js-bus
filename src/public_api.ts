@@ -1,6 +1,6 @@
 // Bus
 export { MessageBusInterface } from './lib/bus/message-bus.interface';
-export { MessageBusAllowMiddleware } from './lib/bus/message-bus-allow-middleware';
+export { MessageBus } from './lib/bus/message-bus';
 
 // Callable resolver
 export { CallableResolverInterface } from './lib/callable-resolver/callable-resolver.interface';
@@ -18,8 +18,8 @@ export { MessageHandlerResolverInterface } from './lib/resolver/message-handler-
 export { ClassMapHandlerResolver } from './lib/resolver/class-map.handler-resolver';
 
 // Handler
-export { AbstractDelegatesMessageHandlerMiddleware } from './lib/handler/abstract-delegates-message-handler.middleware';
-export { ObservableDelegatesMessageHandlerMiddleware } from './lib/handler/observable-delegates-message-handler.middleware';
+export { AbstractDelegatesMessageHandlerMiddleware } from './lib/message-handler/abstract-delegates-message-handler.middleware';
+export { MessageHandlerMiddleware } from './lib/message-handler/message-handler.middleware';
 
 // Middlewares
 export { MessageBusMiddlewareInterface } from './lib/middleware/message-bus-middleware.interface';

@@ -1,7 +1,7 @@
 
 import { suite, test, should } from '@js-bus/test';
-import { MessageHandlingCollection } from '../../../src/lib/collection/message-handling.collection';
-import { JsBusError } from '../../../src/lib/errors/js-bus.error';
+import { JsBusError } from '../../../../../../src/lib/errors/js-bus.error';
+import { MessageHandlingCollection } from '../../../../../../src/lib/message-handler/mapper/class-map/collection/message-handling.collection';
 
 class MessageTest {}
 class MessageHandlerTest {}

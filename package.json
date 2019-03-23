@@ -82,6 +82,7 @@
     ],
     "exclude": [
       "node_modules/",
+      "src/**/errors/**/*.ts",
       "dist/**/*.ts"
     ],
     "extension": [
