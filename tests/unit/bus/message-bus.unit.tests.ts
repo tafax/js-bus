@@ -2,13 +2,13 @@
 import { suite, test, IMock, Mock, It, Times, should } from '@js-bus/test';
 import { of } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
-import { MessageBusAllowMiddleware } from '../../../src/lib/bus/message-bus-allow-middleware';
-import { MessageBusMiddlewareInterface } from '../../../src/lib/middleware/message-bus-middleware.interface';
+import { MessageBus } from '../../../src/lib/bus/message-bus';
+import { MessageBusMiddlewareInterface } from '../../../src/lib/bus/middleware/message-bus-middleware.interface';
 
-@suite class MessageBusAllowMiddlewareUnitTests {
+@suite class MessageBusUnitTests {
 
-  private messageBusFull: MessageBusAllowMiddleware;
-  private messageBusEmpty: MessageBusAllowMiddleware;
+  private messageBusFull: MessageBus;
+  private messageBusEmpty: MessageBus;
 
   private middleware1Mock: IMock<MessageBusMiddlewareInterface>;
   private middleware2Mock: IMock<MessageBusMiddlewareInterface>;
@@ -20,13 +20,13 @@ import { MessageBusMiddlewareInterface } from '../../../src/lib/middleware/messa
     this.middleware2Mock = Mock.ofType<MessageBusMiddlewareInterface>();
     this.middleware3Mock = Mock.ofType<MessageBusMiddlewareInterface>();
 
-    this.messageBusFull = new MessageBusAllowMiddleware([
+    this.messageBusFull = new MessageBus([
       this.middleware1Mock.object,
       this.middleware2Mock.object,
       this.middleware3Mock.object
     ]);
 
-    this.messageBusEmpty = new MessageBusAllowMiddleware();
+    this.messageBusEmpty = new MessageBus();
   }
 
   @test 'should return an empty middleware'() {

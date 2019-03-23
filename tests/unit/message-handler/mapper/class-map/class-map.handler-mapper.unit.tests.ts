@@ -1,26 +1,26 @@
 
 import { suite, test, IMock, Mock, Times } from '@js-bus/test';
-import { CallableResolverInterface } from '../../../src/lib/callable-resolver/callable-resolver.interface';
-import { MessageHandlingCollection } from '../../../src/lib/collection/message-handling.collection';
-import { MessageTypeExtractorInterface } from '../../../src/lib/extractor/message-type-extractor.interface';
-import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.handler-resolver';
+import { HandlerResolverInterface } from '../../../../../src/lib/message-handler/handler-resolver/handler-resolver.interface';
+import { ClassMapHandlerMapper } from '../../../../../src/lib/message-handler/mapper/class-map/class-map.handler-mapper';
+import { MessageHandlingCollection } from '../../../../../src/lib/message-handler/mapper/class-map/collection/message-handling.collection';
+import { MessageTypeExtractorInterface } from '../../../../../src/lib/message-handler/mapper/class-map/extractor/message-type-extractor.interface';
 
-@suite class ClassMapHandlerResolverUnitTests {
+@suite class ClassMapHandlerMapperUnitTests {
 
-  private classMapHandlerResolver: ClassMapHandlerResolver;
+  private classMapHandlerMapper: ClassMapHandlerMapper;
   private messageHandlingCollectionMock: IMock<MessageHandlingCollection>;
-  private callableResolverMock: IMock<CallableResolverInterface>;
+  private handlerResolverMock: IMock<HandlerResolverInterface>;
   private extractorMock: IMock<MessageTypeExtractorInterface>;
 
   before() {
 
     this.messageHandlingCollectionMock = Mock.ofType(MessageHandlingCollection);
-    this.callableResolverMock = Mock.ofType<CallableResolverInterface>();
+    this.handlerResolverMock = Mock.ofType<HandlerResolverInterface>();
     this.extractorMock = Mock.ofType<MessageTypeExtractorInterface>();
 
-    this.classMapHandlerResolver = new ClassMapHandlerResolver(
+    this.classMapHandlerMapper = new ClassMapHandlerMapper(
       this.messageHandlingCollectionMock.object,
-      this.callableResolverMock.object,
+      this.handlerResolverMock.object,
       this.extractorMock.object
     );
   }
@@ -43,16 +43,16 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .returns(() => HandlerClass)
       .verifiable(Times.once());
 
-    this.callableResolverMock
+    this.handlerResolverMock
       .setup(x => x.resolve(HandlerClass))
-      .returns(() => handler.handle)
+      .returns(() => handler)
       .verifiable(Times.once());
 
-    this.classMapHandlerResolver.getHandler(message).should.be.eql(handler.handle);
+    this.classMapHandlerMapper.getHandler(message).should.be.eql(handler);
 
     this.extractorMock.verifyAll();
     this.messageHandlingCollectionMock.verifyAll();
-    this.callableResolverMock.verifyAll();
+    this.handlerResolverMock.verifyAll();
   }
 
   @test 'should re-throw the error if the extractor throws an error'() {
@@ -65,7 +65,7 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .throws(new Error('extractor-error'))
       .verifiable(Times.once());
 
-    (() => { this.classMapHandlerResolver.getHandler(message); }).should.throw('extractor-error');
+    (() => { this.classMapHandlerMapper.getHandler(message); }).should.throw('extractor-error');
 
     this.extractorMock.verifyAll();
   }
@@ -85,7 +85,7 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .throws(new Error('collection-error'))
       .verifiable(Times.once());
 
-    (() => { this.classMapHandlerResolver.getHandler(message); }).should.throw('collection-error');
+    (() => { this.classMapHandlerMapper.getHandler(message); }).should.throw('collection-error');
 
     this.extractorMock.verifyAll();
     this.messageHandlingCollectionMock.verifyAll();
@@ -108,16 +108,16 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .returns(() => HandlerClass)
       .verifiable(Times.once());
 
-    this.callableResolverMock
+    this.handlerResolverMock
       .setup(x => x.resolve(HandlerClass))
       .throws(new Error('resolver-error'))
       .verifiable(Times.once());
 
-    (() => { this.classMapHandlerResolver.getHandler(message); }).should.throw('resolver-error');
+    (() => { this.classMapHandlerMapper.getHandler(message); }).should.throw('resolver-error');
 
     this.extractorMock.verifyAll();
     this.messageHandlingCollectionMock.verifyAll();
-    this.callableResolverMock.verifyAll();
+    this.handlerResolverMock.verifyAll();
 
   }
 }

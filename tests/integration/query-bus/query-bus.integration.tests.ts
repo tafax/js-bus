@@ -1,12 +1,12 @@
 
 import { suite, test, Mock, IMock, Times } from '@js-bus/test';
 import { of } from 'rxjs';
-import { MessageBusAllowMiddleware } from '../../../src/lib/bus/message-bus-allow-middleware';
-import { ServiceLocatorAwareCallableResolver } from '../../../src/lib/callable-resolver/service-locator-aware.callable-resolver';
-import { MessageHandlingCollection } from '../../../src/lib/collection/message-handling.collection';
-import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/extractor/function-constructor.message-type-extractor';
-import { ObservableDelegatesMessageHandlerMiddleware } from '../../../src/lib/handler/observable-delegates-message-handler.middleware';
-import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.handler-resolver';
+import { MessageBus } from '../../../src/lib/bus/message-bus';
+import { ServiceLocatorAwareHandlerResolver } from '../../../src/lib/message-handler/handler-resolver/service-locator-aware.handler-resolver';
+import { ClassMapHandlerMapper } from '../../../src/lib/message-handler/mapper/class-map/class-map.handler-mapper';
+import { MessageHandlingCollection } from '../../../src/lib/message-handler/mapper/class-map/collection/message-handling.collection';
+import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/message-handler/mapper/class-map/extractor/function-constructor.message-type-extractor';
+import { MessageHandlerMiddleware } from '../../../src/lib/message-handler/message-handler.middleware';
 import { CustomError } from '../../fixtures/custom.error';
 import { EvilQueryForTest } from '../../fixtures/evil-query-for-test';
 import { EvilQueryHandlerForTest } from '../../fixtures/evil-query-handler-for-test';
@@ -15,7 +15,7 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
 
 @suite class QueryBusIntegrationTests {
 
-  private queryBus: MessageBusAllowMiddleware;
+  private queryBus: MessageBus;
   private serviceLocatorMock: IMock<Function>;
 
   before() {
@@ -27,16 +27,16 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
     ]);
 
     const functionExtractor = new FunctionConstructorMessageTypeExtractor();
-    const serviceLocatorResolver = new ServiceLocatorAwareCallableResolver(this.serviceLocatorMock.object);
+    const serviceLocatorResolver = new ServiceLocatorAwareHandlerResolver(this.serviceLocatorMock.object);
 
-    const classMapHandlerResolver = new ClassMapHandlerResolver(
+    const classMapHandlerResolver = new ClassMapHandlerMapper(
       messageHandlingCollection,
       serviceLocatorResolver,
       functionExtractor
     );
 
-    this.queryBus = new MessageBusAllowMiddleware([
-      new ObservableDelegatesMessageHandlerMiddleware(classMapHandlerResolver)
+    this.queryBus = new MessageBus([
+      new MessageHandlerMiddleware(classMapHandlerResolver)
     ]);
   }
 

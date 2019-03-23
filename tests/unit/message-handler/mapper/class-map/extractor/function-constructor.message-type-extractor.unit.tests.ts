@@ -1,6 +1,6 @@
 
 import { suite, test } from '@js-bus/test';
-import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/extractor/function-constructor.message-type-extractor';
+import { FunctionConstructorMessageTypeExtractor } from '../../../../../../src/lib/message-handler/mapper/class-map/extractor/function-constructor.message-type-extractor';
 
 @suite class FunctionConstructorMessageTypeExtractorUnitTests {
 

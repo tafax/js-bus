@@ -1,20 +1,21 @@
 
 import { suite, test, IMock, Mock, Times } from '@js-bus/test';
 import { of } from 'rxjs';
-import { ObservableDelegatesMessageHandlerMiddleware } from '../../../src/lib/handler/observable-delegates-message-handler.middleware';
-import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/message-handler-resolver.interface';
+import { MessageHandlerMapperInterface } from '../../../src/lib/message-handler/mapper/message-handler-mapper.interface';
+import { MessageHandlerInterface } from '../../../src/lib/message-handler/message-handler.interface';
+import { MessageHandlerMiddleware } from '../../../src/lib/message-handler/message-handler.middleware';
 
-@suite class ObservablesDelegatesMessageHandlerMiddlewareUnitTests {
+@suite class MessageHandlerMiddlewareUnitTests {
 
-  private delegatesToMessageHandlerMiddleware: ObservableDelegatesMessageHandlerMiddleware;
-  private messageHandlerResolverMock: IMock<MessageHandlerResolverInterface>;
+  private delegatesToMessageHandlerMiddleware: MessageHandlerMiddleware;
+  private messageHandlerMapperMock: IMock<MessageHandlerMapperInterface>;
 
   before() {
 
-    this.messageHandlerResolverMock = Mock.ofType<MessageHandlerResolverInterface>();
+    this.messageHandlerMapperMock = Mock.ofType<MessageHandlerMapperInterface>();
 
-    this.delegatesToMessageHandlerMiddleware = new ObservableDelegatesMessageHandlerMiddleware(
-      this.messageHandlerResolverMock.object
+    this.delegatesToMessageHandlerMiddleware = new MessageHandlerMiddleware(
+      this.messageHandlerMapperMock.object
     );
   }
 
@@ -28,13 +29,13 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
+    const handlerMock = Mock.ofType<MessageHandlerInterface>();
     handlerMock
-      .setup(x => x(message))
+      .setup(x => x.handle(message))
       .returns(() => of('handler-resolved'))
       .verifiable(Times.once());
 
-    this.messageHandlerResolverMock
+    this.messageHandlerMapperMock
       .setup(x => x.getHandler(message))
       .returns(() => handlerMock.object)
       .verifiable(Times.once());
@@ -59,13 +60,13 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
+    const handlerMock = Mock.ofType<MessageHandlerInterface>();
     handlerMock
-      .setup(x => x(message))
+      .setup(x => x.handle(message))
       .returns(() => 'handler-resolved')
       .verifiable(Times.once());
 
-    this.messageHandlerResolverMock
+    this.messageHandlerMapperMock
       .setup(x => x.getHandler(message))
       .returns(() => handlerMock.object)
       .verifiable(Times.once());
@@ -87,13 +88,13 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
+    const handlerMock = Mock.ofType<MessageHandlerInterface>();
     handlerMock
-      .setup(x => x(message))
+      .setup(x => x.handle(message))
       .returns(() => Promise.resolve('handler-resolved'))
       .verifiable(Times.once());
 
-    this.messageHandlerResolverMock
+    this.messageHandlerMapperMock
       .setup(x => x.getHandler(message))
       .returns(() => handlerMock.object)
       .verifiable(Times.once());
@@ -115,13 +116,13 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
+    const handlerMock = Mock.ofType<MessageHandlerInterface>();
     handlerMock
-      .setup(x => x(message))
+      .setup(x => x.handle(message))
       .returns(() => 'handler-resolved')
       .verifiable(Times.once());
 
-    this.messageHandlerResolverMock
+    this.messageHandlerMapperMock
       .setup(x => x.getHandler(message))
       .returns(() => handlerMock.object)
       .verifiable(Times.once());
@@ -146,13 +147,13 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.never());
 
-    const handlerMock = Mock.ofType(Function);
+    const handlerMock = Mock.ofType<MessageHandlerInterface>();
     handlerMock
-      .setup(x => x(message))
+      .setup(x => x.handle(message))
       .throws(new Error('handler-error'))
       .verifiable(Times.once());
 
-    this.messageHandlerResolverMock
+    this.messageHandlerMapperMock
       .setup(x => x.getHandler(message))
       .returns(() => handlerMock.object)
       .verifiable(Times.once());

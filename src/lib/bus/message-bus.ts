@@ -2,12 +2,12 @@
 import { Observable, of } from 'rxjs';
 import { publishReplay, refCount } from 'rxjs/operators';
 import { MessageBusInterface } from './message-bus.interface';
-import { MessageBusMiddlewareInterface } from '../middleware/message-bus-middleware.interface';
+import { MessageBusMiddlewareInterface } from './middleware/message-bus-middleware.interface';
 
 /**
  * A MessageBus that allows to use middlewares.
  */
-export class MessageBusAllowMiddleware implements MessageBusInterface {
+export class MessageBus implements MessageBusInterface {
 
   constructor(private _middlewares: MessageBusMiddlewareInterface[] = []) {}
 

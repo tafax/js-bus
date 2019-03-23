@@ -1,7 +1,7 @@
 
-// Defines a convenience type to describe the message/handler pair.
-import { JsBusError } from '../errors/js-bus.error';
+import { JsBusError } from '../../../../errors/js-bus.error';
 
+// Defines a convenience type to describe the message/handler pair.
 export interface MessageHandlerPair { message: any; handler: any; };
 
 /**
