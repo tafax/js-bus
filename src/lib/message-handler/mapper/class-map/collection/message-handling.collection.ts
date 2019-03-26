@@ -39,7 +39,8 @@ export class MessageHandlingCollection {
   }
 
   constructor(private _collection: MessageHandlerPair[] = []) {
-    this._checksDuplications();
+    // TODO: This doesn't work with minification.
+    // this._checksDuplications();
   }
 
   /**
@@ -47,7 +48,7 @@ export class MessageHandlingCollection {
    */
   setCollection(collection: MessageHandlerPair[]) {
     this._collection = collection;
-    this._checksDuplications();
+    // this._checksDuplications();
   }
 
   /**
