@@ -1,5 +1,5 @@
 
-import { MessageHandlerInterface } from '../handler-resolver/message-handler.interface';
+import { MessageHandlerInterface } from '../message-handler.interface';
 
 /**
  * Describes an interface to build an handler resolver

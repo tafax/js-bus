@@ -1,5 +1,5 @@
 
-import { suite, test, skip, should } from '@js-bus/test';
+import { suite, test, should } from '@js-bus/test';
 import { JsBusError } from '../../../../../../src/lib/errors/js-bus.error';
 import { MessageHandlingCollection } from '../../../../../../src/lib/message-handler/mapper/class-map/collection/message-handling.collection';
 
@@ -39,7 +39,7 @@ class MessageHandlerTest {}
     this.messageHandlingCollection.getMessage(MessageHandlerTest).should.be.eql(MessageTest);
   }
 
-  @test @skip 'should throw error if there are duplications in the collection using string'() {
+  @test 'should throw error if there are duplications in the collection using string'() {
     (() => {
       this.messageHandlingCollection.setCollection([
         { message: 'message', handler: 'handler' },
@@ -49,7 +49,7 @@ class MessageHandlerTest {}
     }).should.throw(JsBusError);
   }
 
-  @test @skip 'should throw error if there are duplications in the collection using classes'() {
+  @test 'should throw error if there are duplications in the collection using classes'() {
     (() => {
       this.messageHandlingCollection.setCollection([
         { message: 'message', handler: 'handler' },

@@ -1,25 +1,36 @@
+
+// Adding the polyfills.
+import 'ts-polyfill/lib/es2015-core';
+import 'ts-polyfill/lib/es2015-promise';
+import 'ts-polyfill/lib/es2015-collection';
+
 // Bus
 export { MessageBusInterface } from './lib/bus/message-bus.interface';
 export { MessageBus } from './lib/bus/message-bus';
 
-// Callable resolver
-export { CallableResolverInterface } from './lib/callable-resolver/callable-resolver.interface';
-export { ServiceLocatorAwareCallableResolver } from './lib/callable-resolver/service-locator-aware.callable-resolver';
+// Handler resolver
+export { HandlerResolverInterface } from './lib/message-handler/handler-resolver/handler-resolver.interface';
+export { ServiceLocatorInterface } from './lib/message-handler/handler-resolver/service-locator/service-locator.interface';
+export { ServiceLocatorHandlerResolver } from './lib/message-handler/handler-resolver/service-locator/service-locator.handler-resolver';
+export { ServiceLocatorAwareHandlerResolver } from './lib/message-handler/handler-resolver/service-locator-aware/service-locator-aware.handler-resolver';
+
+/* Class Map */
 
 // Collection
-export { MessageHandlingCollection, MessageHandlerPair } from './lib/collection/message-handling.collection';
+export { MessageHandlingCollection, MessageHandlerPair } from './lib/message-handler/mapper/class-map/collection/message-handling.collection';
 
 // Extractor
-export { MessageTypeExtractorInterface } from './lib/extractor/message-type-extractor.interface';
-export { FunctionConstructorMessageTypeExtractor } from './lib/extractor/function-constructor.message-type-extractor';
+export { MessageTypeExtractorInterface } from './lib/message-handler/mapper/class-map/extractor/message-type-extractor.interface';
+export { FunctionConstructorMessageTypeExtractor } from './lib/message-handler/mapper/class-map/extractor/function-constructor.message-type-extractor';
 
-// Resolver
-export { MessageHandlerResolverInterface } from './lib/resolver/message-handler-resolver.interface';
-export { ClassMapHandlerResolver } from './lib/resolver/class-map.handler-resolver';
+// Class map handler mapper
+export { ClassMapHandlerMapper } from './lib/message-handler/mapper/class-map/class-map.handler-mapper';
 
-// Handler
-export { AbstractDelegatesMessageHandlerMiddleware } from './lib/message-handler/abstract-delegates-message-handler.middleware';
+// Message handler mapper
+export { MessageHandlerMapperInterface } from './lib/message-handler/mapper/message-handler-mapper.interface';
+
+/* End Class Map */
+
+// Message Handler
+export { MessageHandlerInterface } from './lib/message-handler/message-handler.interface';
 export { MessageHandlerMiddleware } from './lib/message-handler/message-handler.middleware';
-
-// Middlewares
-export { MessageBusMiddlewareInterface } from './lib/middleware/message-bus-middleware.interface';

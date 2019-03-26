@@ -6,7 +6,7 @@
     "target": "es5",
     "lib": [
       "dom",
-      "es2018"
+      "es2015"
     ],
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
