@@ -2,7 +2,8 @@
 import { suite, test, Mock, IMock, Times } from '@js-bus/test';
 import { of } from 'rxjs';
 import { MessageBus } from '../../../src/lib/bus/message-bus';
-import { ServiceLocatorAwareHandlerResolver } from '../../../src/lib/message-handler/handler-resolver/service-locator-aware.handler-resolver';
+import { ServiceLocatorHandlerResolver } from '../../../src/lib/message-handler/handler-resolver/service-locator/service-locator.handler-resolver';
+import { ServiceLocatorInterface } from '../../../src/lib/message-handler/handler-resolver/service-locator/service-locator.interface';
 import { ClassMapHandlerMapper } from '../../../src/lib/message-handler/mapper/class-map/class-map.handler-mapper';
 import { MessageHandlingCollection } from '../../../src/lib/message-handler/mapper/class-map/collection/message-handling.collection';
 import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/message-handler/mapper/class-map/extractor/function-constructor.message-type-extractor';
@@ -16,10 +17,10 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
 @suite class QueryBusIntegrationTests {
 
   private queryBus: MessageBus;
-  private serviceLocatorMock: IMock<Function>;
+  private serviceLocatorMock: IMock<ServiceLocatorInterface>;
 
   before() {
-    this.serviceLocatorMock = Mock.ofType<Function>();
+    this.serviceLocatorMock = Mock.ofType<ServiceLocatorInterface>();
 
     const messageHandlingCollection = new MessageHandlingCollection([
       { message: GoodQueryForTest, handler: GoodQueryHandlerForTest },
@@ -27,7 +28,7 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
     ]);
 
     const functionExtractor = new FunctionConstructorMessageTypeExtractor();
-    const serviceLocatorResolver = new ServiceLocatorAwareHandlerResolver(this.serviceLocatorMock.object);
+    const serviceLocatorResolver = new ServiceLocatorHandlerResolver(this.serviceLocatorMock.object);
 
     const classMapHandlerResolver = new ClassMapHandlerMapper(
       messageHandlingCollection,
@@ -45,7 +46,7 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
     const query = new GoodQueryForTest();
 
     this.serviceLocatorMock
-      .setup(x => x(GoodQueryHandlerForTest))
+      .setup(x => x.get(GoodQueryHandlerForTest))
       .returns(() => new GoodQueryHandlerForTest())
       .verifiable(Times.once());
 
@@ -71,7 +72,7 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
       .verifiable(Times.once());
 
     this.serviceLocatorMock
-      .setup(x => x(GoodQueryHandlerForTest))
+      .setup(x => x.get(GoodQueryHandlerForTest))
       .returns(() => queryHandlerMock.object)
       .verifiable(Times.once());
 
@@ -94,7 +95,7 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
     const query = new EvilQueryForTest();
 
     this.serviceLocatorMock
-      .setup(x => x(EvilQueryHandlerForTest))
+      .setup(x => x.get(EvilQueryHandlerForTest))
       .returns(() => new EvilQueryHandlerForTest())
       .verifiable(Times.once());
 
