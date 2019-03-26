@@ -2,7 +2,8 @@
 import { suite, test, Mock, IMock, Times } from '@js-bus/test';
 import { of } from 'rxjs';
 import { MessageBus } from '../../../src/lib/bus/message-bus';
-import { ServiceLocatorAwareHandlerResolver } from '../../../src/lib/message-handler/handler-resolver/service-locator-aware.handler-resolver';
+import { ServiceLocatorHandlerResolver } from '../../../src/lib/message-handler/handler-resolver/service-locator/service-locator.handler-resolver';
+import { ServiceLocatorInterface } from '../../../src/lib/message-handler/handler-resolver/service-locator/service-locator.interface';
 import { ClassMapHandlerMapper } from '../../../src/lib/message-handler/mapper/class-map/class-map.handler-mapper';
 import { MessageHandlingCollection } from '../../../src/lib/message-handler/mapper/class-map/collection/message-handling.collection';
 import { FunctionConstructorMessageTypeExtractor } from '../../../src/lib/message-handler/mapper/class-map/extractor/function-constructor.message-type-extractor';
@@ -16,11 +17,11 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
 @suite class CommandBusIntegrationTests {
 
   private commandBus: MessageBus;
-  private serviceLocatorMock: IMock<Function>;
+  private serviceLocatorMock: IMock<ServiceLocatorInterface>;
 
   before() {
 
-    this.serviceLocatorMock = Mock.ofType<Function>();
+    this.serviceLocatorMock = Mock.ofType<ServiceLocatorInterface>();
 
     const messageHandlingCollection = new MessageHandlingCollection([
       { message: GoodCommandForTest, handler: GoodCommandHandlerForTest },
@@ -28,7 +29,7 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
     ]);
 
     const functionExtractor = new FunctionConstructorMessageTypeExtractor();
-    const serviceLocatorResolver = new ServiceLocatorAwareHandlerResolver(this.serviceLocatorMock.object);
+    const serviceLocatorResolver = new ServiceLocatorHandlerResolver(this.serviceLocatorMock.object);
 
     const classMapHandlerResolver = new ClassMapHandlerMapper(
       messageHandlingCollection,
@@ -46,7 +47,7 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
     const command = new GoodCommandForTest();
 
     this.serviceLocatorMock
-      .setup(x => x(GoodCommandHandlerForTest))
+      .setup(x => x.get(GoodCommandHandlerForTest))
       .returns(() => new GoodCommandHandlerForTest())
       .verifiable(Times.once());
 
@@ -70,7 +71,7 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
       .verifiable(Times.once());
 
     this.serviceLocatorMock
-      .setup(x => x(GoodCommandHandlerForTest))
+      .setup(x => x.get(GoodCommandHandlerForTest))
       .returns(() => commandHandlerMock.object)
       .verifiable(Times.once());
 
@@ -91,7 +92,7 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
     const command = new EviCommandForTest();
 
     this.serviceLocatorMock
-      .setup(x => x(EvilCommandHandlerForTest))
+      .setup(x => x.get(EvilCommandHandlerForTest))
       .returns(() => new EvilCommandHandlerForTest())
       .verifiable(Times.once());
 

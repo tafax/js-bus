@@ -1,10 +1,12 @@
 
-import { JsBusError } from '../../errors/js-bus.error';
-import { MessageHandlerInterface } from '../message-handler.interface';
-import { HandlerResolverInterface } from './handler-resolver.interface';
+import { JsBusError } from '../../../errors/js-bus.error';
+import { MessageHandlerInterface } from '../../message-handler.interface';
+import { HandlerResolverInterface } from '../handler-resolver.interface';
 
 /**
  * Resolves an object by using a specific function of a dependency resolver.
+ *
+ * @deprecated
  */
 export class ServiceLocatorAwareHandlerResolver implements HandlerResolverInterface {
 
