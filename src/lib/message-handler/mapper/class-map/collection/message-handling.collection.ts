@@ -19,15 +19,12 @@ export class MessageHandlingCollection {
     const messages = this._collection
       .map((pair: MessageHandlerPair) => pair.message);
 
-    // Calculates groups based on messages and count the entries for a given message.
-    const groups = {};
-    for (const message of messages) {
-      groups[message] = !groups[message] ? 1 : groups[message] + 1;
-    }
+    // Sets removes the duplications by design.
+    const messagesSet = new Set(messages);
+    const messagesArray = Array.from(messagesSet);
 
     // Checks if there is at least a duplication.
-    const isDuplicated = !!Object.values(groups)
-      .find((value: number) => value > 1);
+    const isDuplicated = messagesArray.length < messages.length;
 
     // If not, we are fine.
     if (!isDuplicated) {
@@ -39,8 +36,7 @@ export class MessageHandlingCollection {
   }
 
   constructor(private _collection: MessageHandlerPair[] = []) {
-    // TODO: This doesn't work with minification.
-    // this._checksDuplications();
+    this._checksDuplications();
   }
 
   /**
@@ -48,7 +44,7 @@ export class MessageHandlingCollection {
    */
   setCollection(collection: MessageHandlerPair[]) {
     this._collection = collection;
-    // this._checksDuplications();
+    this._checksDuplications();
   }
 
   /**

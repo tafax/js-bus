@@ -42,7 +42,9 @@
   "author": "Matteo Tafani Alunno <mtafanialunno@vendini.com>",
   "license": "MIT",
   "homepage": "https://github.com/tafax/js-bus",
-  "dependencies": {},
+  "dependencies": {
+    "ts-polyfill": "^3.3.3"
+  },
   "peerDependencies": {
     "rxjs": "^6.0.0",
     "tslib": "^1.9.3"
