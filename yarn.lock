@@ -4439,14 +4439,6 @@ rollup-pluginutils@^2.7.0:
     estree-walker "^0.6.0"
     micromatch "^3.1.10"
 
-rollup-pluginutils@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.7.0.tgz#da24a6f99432626160643ac6b087d71684317c4f"
-  integrity sha512-FoP6L1YnMYTAR06Dpq5LE3jJtMwPE6H4VEOqFU23yoziZnqNRSiWcVy6YgEY5PdQB4G7278+8c4TvB0JKS1csA==
-  dependencies:
-    estree-walker "^0.6.0"
-    micromatch "^3.1.10"
-
 rollup@^1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.10.0.tgz#91d594aa4386c51ca0883ad4ef2050b469d3e8aa"
@@ -5434,10 +5426,10 @@ typemoq@^2.1.0:
     lodash "^4.17.4"
     postinstall-build "^5.0.1"
 
-typescript-tslint-plugin@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/typescript-tslint-plugin/-/typescript-tslint-plugin-0.4.0.tgz#af1729e72b770489b2b912809694f46c3281bb72"
-  integrity sha512-83zipyk5bCqu/LHifaWPmJ7Xnl6lLn/3KmWINgr+XND79BrVWmkV8CudKc+a9Jhjs2opvVKq0n0P4O4NhHOixw==
+typescript-tslint-plugin@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/typescript-tslint-plugin/-/typescript-tslint-plugin-0.5.0.tgz#4cefc7f2583d5e663c5e60dc95667f5a93ce7dd0"
+  integrity sha512-qVejs4wVu6RmiNOTekPJIlztt6lN+QC+lArqbcP3CaBuABDsJ0BXYofZX1H2ZywAblOnx403FSrhQcgnRBUGQA==
   dependencies:
     minimatch "^3.0.4"
     mock-require "^3.0.2"
