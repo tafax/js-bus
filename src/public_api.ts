@@ -16,6 +16,7 @@ export { FunctionConstructorMessageTypeExtractor } from './lib/extractor/functio
 // Resolver
 export { MessageHandlerResolverInterface } from './lib/resolver/message-handler-resolver.interface';
 export { ClassMapHandlerResolver } from './lib/resolver/class-map.handler-resolver';
+export { FunctionsMapHandlerResolver } from './lib/resolver/functions-map.handler-resolver';
 
 // Handler
 export { AbstractDelegatesMessageHandlerMiddleware } from './lib/handler/abstract-delegates-message-handler.middleware';

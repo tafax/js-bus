@@ -2,7 +2,7 @@
 // Defines a convenience type to describe the message/handler pair.
 import { JsBusError } from '../errors/js-bus.error';
 
-export interface MessageHandlerPair { message: any; handler: any; };
+export interface MessageHandlerPair { message: any; handlers: any[]; };
 
 /**
  * Defines a collection of the message/handler pairs.
@@ -54,10 +54,10 @@ export class MessageHandlingCollection {
   /**
    * Gets a handler given a specific message.
    */
-  getHandler(message: any): any {
+  getHandlers(message: any): any[] {
     const handlers = this._collection
       .filter((pair: MessageHandlerPair) => pair.message === message)
-      .map((pair: MessageHandlerPair) => pair.handler);
+      .map((pair: MessageHandlerPair) => pair.handlers);
 
     return handlers.length > 0 ? handlers[0] : undefined;
   }
@@ -67,7 +67,9 @@ export class MessageHandlingCollection {
    */
   getMessage(handler: any): any {
     const messages = this._collection
-      .filter((pair: MessageHandlerPair) => pair.handler === handler)
+      .filter((pair: MessageHandlerPair) =>
+        pair.handlers.some((value: any) => value === handler)
+      )
       .map((pair: MessageHandlerPair) => pair.message);
 
     return messages.length > 0 ? messages[0] : undefined;

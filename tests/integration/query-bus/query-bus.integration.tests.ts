@@ -22,8 +22,8 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
     this.serviceLocatorMock = Mock.ofType<Function>();
 
     const messageHandlingCollection = new MessageHandlingCollection([
-      { message: GoodQueryForTest, handler: GoodQueryHandlerForTest },
-      { message: EvilQueryForTest, handler: EvilQueryHandlerForTest }
+      { message: GoodQueryForTest, handlers: [ GoodQueryHandlerForTest ] },
+      { message: EvilQueryForTest, handlers: [ EvilQueryHandlerForTest ] }
     ]);
 
     const functionExtractor = new FunctionConstructorMessageTypeExtractor();
@@ -52,7 +52,7 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
     return this.queryBus.handle(query)
       .subscribe(
         (result: string) => {
-          result.should.be.eql('result-value');
+          result.should.be.eql([ 'result-value' ]);
 
           this.serviceLocatorMock.verifyAll();
         },
@@ -82,7 +82,7 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
 
     return execution$
       .subscribe((result: string) => {
-        result.should.be.eql('result-value');
+        result.should.be.eql([ 'result-value' ]);
 
         this.serviceLocatorMock.verifyAll();
         queryHandlerMock.verifyAll();
