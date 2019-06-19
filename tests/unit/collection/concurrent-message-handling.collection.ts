@@ -26,7 +26,7 @@ class MessageHandlerTest {
     should.equal(this.concurrentMessageHandlingCollection.getMessage(() => {}), undefined);
   }
 
-  @test 'should return the correct handlers given a message'() {
+  @test 'should return the correct set of handlers given a message'() {
 
     const messageHandlerTest = new MessageHandlerTest();
 
