@@ -1,5 +1,5 @@
 
-import { MessageHandlingCollection } from "../collection/message-handling.collection";
+import { ConcurrentMessageHandlingCollection } from "../collection/concurrent-message-handling.collection";
 import { MessageTypeExtractorInterface } from "../extractor/message-type-extractor.interface";
 import { MessageHandlerResolverInterface } from "./message-handler-resolver.interface";
 
@@ -9,7 +9,7 @@ import { MessageHandlerResolverInterface } from "./message-handler-resolver.inte
 export class FunctionsMapHandlerResolver implements MessageHandlerResolverInterface {
 
   constructor(
-      private _messageHandlingCollection: MessageHandlingCollection,
+      private _messageHandlingCollection: ConcurrentMessageHandlingCollection,
       private _extractor: MessageTypeExtractorInterface
   ) {}
 
@@ -20,6 +20,6 @@ export class FunctionsMapHandlerResolver implements MessageHandlerResolverInterf
       // Extracts the identifier.
       const identifier = this._extractor.extract(message);
       // Gets the function handlers based on the message identifier.
-      return this._messageHandlingCollection.getHandlers(identifier);
+      return this._messageHandlingCollection.getHandler(identifier);
     }
 }

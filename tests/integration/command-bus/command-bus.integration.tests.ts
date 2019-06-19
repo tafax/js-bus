@@ -23,8 +23,8 @@ import { GoodCommandHandlerForTest } from '../../fixtures/good-command-handler-f
     this.serviceLocatorMock = Mock.ofType<Function>();
 
     const messageHandlingCollection = new MessageHandlingCollection([
-      { message: GoodCommandForTest, handlers: [ GoodCommandHandlerForTest ] },
-      { message: EviCommandForTest, handlers: [ EvilCommandHandlerForTest ] }
+      { message: GoodCommandForTest, handler: GoodCommandHandlerForTest },
+      { message: EviCommandForTest, handler: EvilCommandHandlerForTest }
     ]);
 
     const functionExtractor = new FunctionConstructorMessageTypeExtractor();

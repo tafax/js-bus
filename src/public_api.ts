@@ -6,8 +6,9 @@ export { MessageBusAllowMiddleware } from './lib/bus/message-bus-allow-middlewar
 export { CallableResolverInterface } from './lib/callable-resolver/callable-resolver.interface';
 export { ServiceLocatorAwareCallableResolver } from './lib/callable-resolver/service-locator-aware.callable-resolver';
 
-// Collection
+// Collections
 export { MessageHandlingCollection, MessageHandlerPair } from './lib/collection/message-handling.collection';
+export { ConcurrentMessageHandlingCollection, MessageHandlersPair } from './lib/collection/concurrent-message-handling.collection';
 
 // Extractor
 export { MessageTypeExtractorInterface } from './lib/extractor/message-type-extractor.interface';

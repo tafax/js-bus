@@ -22,8 +22,8 @@ import { GoodQueryHandlerForTest } from '../../fixtures/good-query-handler-for-t
     this.serviceLocatorMock = Mock.ofType<Function>();
 
     const messageHandlingCollection = new MessageHandlingCollection([
-      { message: GoodQueryForTest, handlers: [ GoodQueryHandlerForTest ] },
-      { message: EvilQueryForTest, handlers: [ EvilQueryHandlerForTest ] }
+      { message: GoodQueryForTest, handler: GoodQueryHandlerForTest },
+      { message: EvilQueryForTest, handler: EvilQueryHandlerForTest }
     ]);
 
     const functionExtractor = new FunctionConstructorMessageTypeExtractor();

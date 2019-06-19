@@ -1,17 +1,17 @@
 
 import { suite, test, IMock, Mock, Times } from '@js-bus/test';
 import { FunctionsMapHandlerResolver } from "../../../src/lib/resolver/functions-map.handler-resolver";
-import { MessageHandlingCollection } from "../../../src/lib/collection/message-handling.collection";
 import { MessageTypeExtractorInterface } from "../../../src/lib/extractor/message-type-extractor.interface";
+import { ConcurrentMessageHandlingCollection } from "../../../src/lib/collection/concurrent-message-handling.collection";
 
 @suite class FunctionsMapHandlerResolverUnitTests {
 
   private functionsMapHandlerResolverUnitTest: FunctionsMapHandlerResolver;
-  private messageHandlingCollectionMock: IMock<MessageHandlingCollection>;
+  private messageHandlingCollectionMock: IMock<ConcurrentMessageHandlingCollection>;
   private extractorMock: IMock<MessageTypeExtractorInterface>;
 
   before() {
-    this.messageHandlingCollectionMock = Mock.ofType(MessageHandlingCollection);
+    this.messageHandlingCollectionMock = Mock.ofType(ConcurrentMessageHandlingCollection);
     this.extractorMock = Mock.ofType<MessageTypeExtractorInterface>();
 
     this.functionsMapHandlerResolverUnitTest = new FunctionsMapHandlerResolver(
@@ -34,7 +34,7 @@ import { MessageTypeExtractorInterface } from "../../../src/lib/extractor/messag
       .verifiable(Times.once());
 
     this.messageHandlingCollectionMock
-      .setup(x => x.getHandlers(MessageClass))
+      .setup(x => x.getHandler(MessageClass))
       .returns(() => [ handler1, handler2 ])
       .verifiable(Times.once());
 
@@ -70,7 +70,7 @@ import { MessageTypeExtractorInterface } from "../../../src/lib/extractor/messag
       .verifiable(Times.once());
 
     this.messageHandlingCollectionMock
-      .setup(x => x.getHandlers(MessageClass))
+      .setup(x => x.getHandler(MessageClass))
       .throws(new Error('collection-error'))
       .verifiable(Times.once());
 

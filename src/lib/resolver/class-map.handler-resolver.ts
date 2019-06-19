@@ -24,9 +24,9 @@ export class ClassMapHandlerResolver implements MessageHandlerResolverInterface 
     // Extracts the identifier.
     const identifier = this._extractor.extract(message);
     // Gets the handler based on the message identifier.
-    const handlers = this._messageHandlingCollection.getHandlers(identifier);
+    const handler = this._messageHandlingCollection.getHandler(identifier);
     // Resolves the handler function.
-    return handlers.map(handler => this._callableResolver.resolve(handler));
+    return [ this._callableResolver.resolve(handler) ];
   }
 
 }

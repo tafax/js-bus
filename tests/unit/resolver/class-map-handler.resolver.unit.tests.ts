@@ -39,8 +39,8 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .verifiable(Times.once());
 
     this.messageHandlingCollectionMock
-      .setup(x => x.getHandlers(MessageClass))
-      .returns(() => [ HandlerClass ])
+      .setup(x => x.getHandler(MessageClass))
+      .returns(() => HandlerClass)
       .verifiable(Times.once());
 
     this.callableResolverMock
@@ -81,7 +81,7 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .verifiable(Times.once());
 
     this.messageHandlingCollectionMock
-      .setup(x => x.getHandlers(MessageClass))
+      .setup(x => x.getHandler(MessageClass))
       .throws(new Error('collection-error'))
       .verifiable(Times.once());
 
@@ -104,8 +104,8 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .verifiable(Times.once());
 
     this.messageHandlingCollectionMock
-      .setup(x => x.getHandlers(MessageClass))
-      .returns(() => [ HandlerClass ])
+      .setup(x => x.getHandler(MessageClass))
+      .returns(() => HandlerClass)
       .verifiable(Times.once());
 
     this.callableResolverMock
