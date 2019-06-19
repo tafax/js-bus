@@ -43,7 +43,7 @@ Let's say it is `v6.5.0`. Afterwards, run `nvm install v6.5.0`.
 ### Link for development (optional)
 
 If you want to link the library to an existing project before pushing your changes.
-You can go to the library root and type:
+You can go to the library root and type: 
 ```
 yarn link
 ```
