@@ -6,8 +6,10 @@ export { MessageBusAllowMiddleware } from './lib/bus/message-bus-allow-middlewar
 export { CallableResolverInterface } from './lib/callable-resolver/callable-resolver.interface';
 export { ServiceLocatorAwareCallableResolver } from './lib/callable-resolver/service-locator-aware.callable-resolver';
 
-// Collection
-export { MessageHandlingCollection, MessageHandlerPair } from './lib/collection/message-handling.collection';
+// Collections
+export { MessageHandlingCollection } from './lib/collection/message-handling.collection';
+export { ConcurrentMessageHandlingCollection } from './lib/collection/concurrent-message-handling.collection';
+export { MessageHandlerPair } from './lib/collection/abstract-message-handling.collection';
 
 // Extractor
 export { MessageTypeExtractorInterface } from './lib/extractor/message-type-extractor.interface';
@@ -16,6 +18,7 @@ export { FunctionConstructorMessageTypeExtractor } from './lib/extractor/functio
 // Resolver
 export { MessageHandlerResolverInterface } from './lib/resolver/message-handler-resolver.interface';
 export { ClassMapHandlerResolver } from './lib/resolver/class-map.handler-resolver';
+export { FunctionsMapHandlerResolver } from './lib/resolver/functions-map.handler-resolver';
 
 // Handler
 export { AbstractDelegatesMessageHandlerMiddleware } from './lib/handler/abstract-delegates-message-handler.middleware';

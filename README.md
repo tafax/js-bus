@@ -38,7 +38,6 @@ This installs version `v0.32.1`, but any other should be the same.
 Let's say it is `v6.5.0`. Afterwards, run `nvm install v6.5.0`.
 * Install **yarn** dependency manager. `npm install -g yarn`.
 * Type `yarn install` to install all dependencies.
-* Type `npm run typings install` to install all the standalone typings.
 * Good to go!
 
 ### Link for development (optional)

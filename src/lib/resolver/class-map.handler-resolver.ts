@@ -20,13 +20,13 @@ export class ClassMapHandlerResolver implements MessageHandlerResolverInterface 
   /**
    * @inheritDoc
    */
-  getHandler(message: any): Function {
+  getHandlers(message: any): Function[] {
     // Extracts the identifier.
     const identifier = this._extractor.extract(message);
     // Gets the handler based on the message identifier.
     const handler = this._messageHandlingCollection.getHandler(identifier);
     // Resolves the handler function.
-    return this._callableResolver.resolve(handler);
+    return [ this._callableResolver.resolve(handler) ];
   }
 
 }

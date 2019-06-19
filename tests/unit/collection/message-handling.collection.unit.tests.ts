@@ -21,7 +21,7 @@ class MessageHandlerTest {}
     should.equal(this.messageHandlingCollection.getMessage(MessageHandlerTest), undefined);
   }
 
-  @test 'should return the correct handler given a message'() {
+  @test 'should return the correct handlers given a message'() {
     this.messageHandlingCollection.setCollection([
       { message: 'message', handler: 'handler' },
       { message: MessageTest, handler: MessageHandlerTest }

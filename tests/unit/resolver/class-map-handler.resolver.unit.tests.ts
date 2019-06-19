@@ -25,12 +25,12 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
     );
   }
 
-  @test 'should return a callable function to handle message'() {
+  @test 'should return a set of callable functions to handle message'() {
 
-    class MessageClass {};
+    class MessageClass {}
     const message = new MessageClass();
 
-    class HandlerClass { handle() {} };
+    class HandlerClass { handle() {} }
     const handler = new HandlerClass();
 
     this.extractorMock
@@ -48,7 +48,7 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .returns(() => handler.handle)
       .verifiable(Times.once());
 
-    this.classMapHandlerResolver.getHandler(message).should.be.eql(handler.handle);
+    this.classMapHandlerResolver.getHandlers(message).should.be.eql([ handler.handle ]);
 
     this.extractorMock.verifyAll();
     this.messageHandlingCollectionMock.verifyAll();
@@ -57,7 +57,7 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
 
   @test 'should re-throw the error if the extractor throws an error'() {
 
-    class MessageClass {};
+    class MessageClass {}
     const message = new MessageClass();
 
     this.extractorMock
@@ -65,14 +65,14 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .throws(new Error('extractor-error'))
       .verifiable(Times.once());
 
-    (() => { this.classMapHandlerResolver.getHandler(message); }).should.throw('extractor-error');
+    (() => { this.classMapHandlerResolver.getHandlers(message); }).should.throw('extractor-error');
 
     this.extractorMock.verifyAll();
   }
 
   @test 'should re-throw the error if the collection throws an error'() {
 
-    class MessageClass {};
+    class MessageClass {}
     const message = new MessageClass();
 
     this.extractorMock
@@ -85,7 +85,7 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .throws(new Error('collection-error'))
       .verifiable(Times.once());
 
-    (() => { this.classMapHandlerResolver.getHandler(message); }).should.throw('collection-error');
+    (() => { this.classMapHandlerResolver.getHandlers(message); }).should.throw('collection-error');
 
     this.extractorMock.verifyAll();
     this.messageHandlingCollectionMock.verifyAll();
@@ -93,10 +93,10 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
 
   @test 'should re-throw the error if the resolver throws an error'() {
 
-    class MessageClass {};
+    class MessageClass {}
     const message = new MessageClass();
 
-    class HandlerClass {};
+    class HandlerClass {}
 
     this.extractorMock
       .setup(x => x.extract(message))
@@ -113,7 +113,7 @@ import { ClassMapHandlerResolver } from '../../../src/lib/resolver/class-map.han
       .throws(new Error('resolver-error'))
       .verifiable(Times.once());
 
-    (() => { this.classMapHandlerResolver.getHandler(message); }).should.throw('resolver-error');
+    (() => { this.classMapHandlerResolver.getHandlers(message); }).should.throw('resolver-error');
 
     this.extractorMock.verifyAll();
     this.messageHandlingCollectionMock.verifyAll();

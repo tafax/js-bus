@@ -18,7 +18,7 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
     );
   }
 
-  @test 'should resolve the handler if observables'() {
+  @test 'should resolve the handlers if observables'() {
 
     const message = 'message';
 
@@ -28,28 +28,35 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
-    handlerMock
+    const handlerMock1 = Mock.ofType(Function);
+    handlerMock1
       .setup(x => x(message))
-      .returns(() => of('handler-resolved'))
+      .returns(() => of('handler1-resolved'))
+      .verifiable(Times.once());
+
+    const handlerMock2 = Mock.ofType(Function);
+    handlerMock2
+      .setup(x => x(message))
+      .returns(() => of('handler2-resolved'))
       .verifiable(Times.once());
 
     this.messageHandlerResolverMock
-      .setup(x => x.getHandler(message))
-      .returns(() => handlerMock.object)
+      .setup(x => x.getHandlers(message))
+      .returns(() => [ handlerMock1.object, handlerMock2.object ])
       .verifiable(Times.once());
 
     return this.delegatesToMessageHandlerMiddleware.handle(message, <any>nextMock.object)
       .subscribe((result: string) => {
 
-        result.should.be.eql('handler-resolved');
+        result.should.be.eql([ 'handler1-resolved', 'handler2-resolved' ]);
 
-        handlerMock.verifyAll();
+        handlerMock1.verifyAll();
+        handlerMock2.verifyAll();
         nextMock.verifyAll();
       });
   }
 
-  @test 'should resolve the handler if not observables'() {
+  @test 'should resolve the handlers if not observables'() {
 
     const message = 'message';
 
@@ -59,25 +66,32 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
-    handlerMock
+    const handlerMock1 = Mock.ofType(Function);
+    handlerMock1
       .setup(x => x(message))
-      .returns(() => 'handler-resolved')
+      .returns(() => 'handler1-resolved')
+      .verifiable(Times.once());
+
+    const handlerMock2 = Mock.ofType(Function);
+    handlerMock2
+      .setup(x => x(message))
+      .returns(() => of('handler2-resolved'))
       .verifiable(Times.once());
 
     this.messageHandlerResolverMock
-      .setup(x => x.getHandler(message))
-      .returns(() => handlerMock.object)
+      .setup(x => x.getHandlers(message))
+      .returns(() => [ handlerMock1.object, handlerMock2.object ])
       .verifiable(Times.once());
 
     return this.delegatesToMessageHandlerMiddleware.handle(message, <any>nextMock.object)
       .subscribe(() => {
-        handlerMock.verifyAll();
+        handlerMock1.verifyAll();
+        handlerMock2.verifyAll();
         nextMock.verifyAll();
       });
   }
 
-  @test 'should resolve the handler if promise'() {
+  @test 'should resolve the handlers if promises'() {
 
     const message = 'message';
 
@@ -87,25 +101,32 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
-    handlerMock
+    const handlerMock1 = Mock.ofType(Function);
+    handlerMock1
       .setup(x => x(message))
-      .returns(() => Promise.resolve('handler-resolved'))
+      .returns(() => Promise.resolve('handler1-resolved'))
+      .verifiable(Times.once());
+
+    const handlerMock2 = Mock.ofType(Function);
+    handlerMock2
+      .setup(x => x(message))
+      .returns(() => of('handler2-resolved'))
       .verifiable(Times.once());
 
     this.messageHandlerResolverMock
-      .setup(x => x.getHandler(message))
-      .returns(() => handlerMock.object)
+      .setup(x => x.getHandlers(message))
+      .returns(() => [ handlerMock1.object, handlerMock2.object, ])
       .verifiable(Times.once());
 
     return this.delegatesToMessageHandlerMiddleware.handle(message, <any>nextMock.object)
       .subscribe(() => {
-        handlerMock.verifyAll();
+        handlerMock1.verifyAll();
+        handlerMock2.verifyAll();
         nextMock.verifyAll();
       });
   }
 
-  @test 'should resolve the handler if not observable and return the handle value'() {
+  @test 'should resolve the handlers if not observables and return the handle value'() {
 
     const message = 'message';
 
@@ -115,28 +136,35 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.once());
 
-    const handlerMock = Mock.ofType(Function);
-    handlerMock
+    const handlerMock1 = Mock.ofType(Function);
+    handlerMock1
       .setup(x => x(message))
-      .returns(() => 'handler-resolved')
+      .returns(() => 'handler1-resolved')
+      .verifiable(Times.once());
+
+    const handlerMock2 = Mock.ofType(Function);
+    handlerMock2
+      .setup(x => x(message))
+      .returns(() => of('handler2-resolved'))
       .verifiable(Times.once());
 
     this.messageHandlerResolverMock
-      .setup(x => x.getHandler(message))
-      .returns(() => handlerMock.object)
+      .setup(x => x.getHandlers(message))
+      .returns(() => [ handlerMock1.object, handlerMock2.object ])
       .verifiable(Times.once());
 
     return this.delegatesToMessageHandlerMiddleware.handle(message, <any>nextMock.object)
       .subscribe((result: any) => {
 
-        result.should.be.eql('handler-resolved');
+        result.should.be.eql([ 'handler1-resolved', 'handler2-resolved' ]);
 
-        handlerMock.verifyAll();
+        handlerMock1.verifyAll();
+        handlerMock2.verifyAll();
         nextMock.verifyAll();
       });
   }
 
-  @test 'should rejected and don\'t catch the error if handler fails'() {
+  @test 'should rejected and don\'t catch the error if an handler fails'() {
 
     const message = 'message';
 
@@ -146,28 +174,34 @@ import { MessageHandlerResolverInterface } from '../../../src/lib/resolver/messa
       .returns(() => of('next-resolved'))
       .verifiable(Times.never());
 
-    const handlerMock = Mock.ofType(Function);
-    handlerMock
+    const handlerMock1 = Mock.ofType(Function);
+    handlerMock1
       .setup(x => x(message))
-      .throws(new Error('handler-error'))
+      .throws(new Error('handler1-error'))
+      .verifiable(Times.once());
+
+    const handlerMock2 = Mock.ofType(Function);
+    handlerMock2
+      .setup(x => x(message))
+      .returns(() => of('handler2-resolved'))
       .verifiable(Times.once());
 
     this.messageHandlerResolverMock
-      .setup(x => x.getHandler(message))
-      .returns(() => handlerMock.object)
+      .setup(x => x.getHandlers(message))
+      .returns(() => [ handlerMock1.object, handlerMock2.object ])
       .verifiable(Times.once());
 
     return this.delegatesToMessageHandlerMiddleware.handle(message, <any>nextMock.object)
       .subscribe(
-          () => { throw new Error('it-should-be-never-called'); },
-          (error: Error) => {
+      () => { throw new Error('it-should-be-never-called'); },
+      (error: Error) => {
 
-            error.message.should.be.eql('handler-error');
+        error.message.should.be.eql('handler1-error');
 
-            handlerMock.verifyAll();
-            nextMock.verifyAll();
-          }
-        );
+        handlerMock1.verifyAll();
+        nextMock.verifyAll();
+      }
+    );
   }
 
 }

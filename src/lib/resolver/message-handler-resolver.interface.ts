@@ -8,5 +8,5 @@ export interface MessageHandlerResolverInterface {
    * @param {any} message The message to use to resolve the handler.
    * @return {Function} The handler function to handle the message.
    */
-    getHandler(message: any): Function;
+    getHandlers(message: any): Function[];
 }

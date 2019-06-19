@@ -1,6 +1,6 @@
 
 import { from, Observable, of } from 'rxjs';
-import { concatMap, map } from 'rxjs/operators';
+import { concatMap, flatMap, map, toArray } from 'rxjs/operators';
 import { AbstractDelegatesMessageHandlerMiddleware } from './abstract-delegates-message-handler.middleware';
 
 /**
@@ -31,11 +31,16 @@ export class ObservableDelegatesMessageHandlerMiddleware extends AbstractDelegat
     return this._wrapWithObservable(message)
       .pipe(
         /**
-         * Resolves the handler based on the specified resolver.
-         * Wraps the handler into an observable to be sure to respect the chain.
+         * Resolves the set of handlers based on the specified resolver.
+         * Wraps the handlers into an observable to be sure to respect the chain.
          */
-        map((currentMessage: T) => this._messageHandlerResolver.getHandler(currentMessage)),
-        concatMap((handler: (message: T) => any) => this._wrapWithObservable(handler(message))),
+        map((currentMessage: T) => this._messageHandlerResolver.getHandlers(currentMessage)),
+        concatMap((handlers) => from(handlers)
+          .pipe(
+            flatMap((handler: (message: T) => any) => this._wrapWithObservable(handler(message))),
+            toArray()
+          )
+        ),
         concatMap(
           (result: any) => next(message)
             .pipe(
