@@ -7,12 +7,12 @@ import { AbstractMessageHandlingCollection, MessageHandlerPair } from "./abstrac
  * It just offers a convenience interface to store and retrieve
  * collection objects.
  */
-export class ConcurrentMessageHandlingCollection extends AbstractMessageHandlingCollection<Function[]> {
+export class ConcurrentMessageHandlingCollection extends AbstractMessageHandlingCollection<Function[], Function> {
 
   /**
    * @inheritDoc
    */
-  protected _isHandlerBoundToPair(handler: any, pair: MessageHandlerPair<Function[]>): boolean {
+  protected _isHandlerBoundToPair(handler: Function, pair: MessageHandlerPair<Function[]>): boolean {
     return pair.handler.some((value: Function) => value === handler);
   }
 

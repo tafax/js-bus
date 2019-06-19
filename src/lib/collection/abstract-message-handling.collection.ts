@@ -3,7 +3,7 @@ import { JsBusError } from "../errors/js-bus.error";
 
 export interface MessageHandlerPair<T = any> { message: any, handler: T }
 
-export abstract class AbstractMessageHandlingCollection<T> {
+export abstract class AbstractMessageHandlingCollection<T, U = T> {
 
   /**
    * The generic collection to connect a message with an handler.
@@ -46,7 +46,7 @@ export abstract class AbstractMessageHandlingCollection<T> {
   /**
    * Determines if the provided handler is bound to the given message-handler pair.
    */
-  protected abstract _isHandlerBoundToPair(handler: any, pair: MessageHandlerPair<T>): boolean;
+  protected abstract _isHandlerBoundToPair(handler: U, pair: MessageHandlerPair<T>): boolean;
 
   /**
    * Sets a collection. It will override the old one.
@@ -70,7 +70,7 @@ export abstract class AbstractMessageHandlingCollection<T> {
   /**
    * Gets a message given a specific handler.
    */
-  getMessage(handler: T): any {
+  getMessage(handler: U): any {
     const messages = this._collection
       .filter((pair: MessageHandlerPair<T>) => this._isHandlerBoundToPair(handler, pair))
       .map((pair: MessageHandlerPair<T>) => pair.message);

@@ -7,8 +7,9 @@ export { CallableResolverInterface } from './lib/callable-resolver/callable-reso
 export { ServiceLocatorAwareCallableResolver } from './lib/callable-resolver/service-locator-aware.callable-resolver';
 
 // Collections
-export { MessageHandlingCollection, MessageHandlerPair } from './lib/collection/message-handling.collection';
-export { ConcurrentMessageHandlingCollection, MessageHandlersPair } from './lib/collection/concurrent-message-handling.collection';
+export { MessageHandlingCollection } from './lib/collection/message-handling.collection';
+export { ConcurrentMessageHandlingCollection } from './lib/collection/concurrent-message-handling.collection';
+export { MessageHandlerPair } from './lib/collection/abstract-message-handling.collection';
 
 // Extractor
 export { MessageTypeExtractorInterface } from './lib/extractor/message-type-extractor.interface';
