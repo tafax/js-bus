@@ -1,6 +1,5 @@
 
 import { HandlerResolverInterface } from '../../handler-resolver/handler-resolver.interface';
-import { MessageHandlerInterface } from '../../message-handler.interface';
 import { MessageHandlerMapperInterface } from '../message-handler-mapper.interface';
 import { MessageTypeExtractorInterface } from './extractor/message-type-extractor.interface';
 import { MessageHandlingCollection } from './collection/message-handling.collection';
@@ -21,13 +20,14 @@ export class ClassMapHandlerMapper implements MessageHandlerMapperInterface {
   /**
    * @inheritDoc
    */
-  getHandler(message: any): MessageHandlerInterface {
+  getHandlers(message: any): Function[] {
     // Extracts the identifier.
     const identifier = this._extractor.extract(message);
     // Gets the handler based on the message identifier.
-    const handler = this._messageHandlingCollection.getHandler(identifier);
+    const handlerIdentifier = this._messageHandlingCollection.getHandler(identifier);
     // Resolves the handler function.
-    return this._callableResolver.resolve(handler);
+    const handler = this._callableResolver.resolve(handlerIdentifier);
+    return [ handler.handle.bind(handler) ];
   }
 
 }
