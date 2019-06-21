@@ -1,9 +1,8 @@
 
 import { from, Observable, of } from 'rxjs';
-import { concatMap, map } from 'rxjs/operators';
+import { concatMap, map, toArray, flatMap } from 'rxjs/operators';
 import { MessageBusMiddlewareInterface } from '../bus/middleware/message-bus-middleware.interface';
 import { MessageHandlerMapperInterface } from './mapper/message-handler-mapper.interface';
-import { MessageHandlerInterface } from './message-handler.interface';
 
 /**
  * Allows to handle a message using a specific handler function.
@@ -14,7 +13,9 @@ import { MessageHandlerInterface } from './message-handler.interface';
  */
 export class MessageHandlerMiddleware implements MessageBusMiddlewareInterface {
 
-  constructor(protected _messageHandlerMapper: MessageHandlerMapperInterface) {}
+  constructor(
+    protected _messageHandlerMapper: MessageHandlerMapperInterface
+  ) {}
 
   /**
    * Wraps up a value with an observable. If needed.
@@ -39,11 +40,16 @@ export class MessageHandlerMiddleware implements MessageBusMiddlewareInterface {
     return this._wrapWithObservable(message)
       .pipe(
         /**
-         * Resolves the handler based on the specified resolver.
-         * Wraps the handler into an observable to be sure to respect the chain.
+         * Resolves the set of handlers based on the specified resolver.
+         * Wraps the handlers into an observable to be sure to respect the chain.
          */
-        map((currentMessage: T) => this._messageHandlerMapper.getHandler(currentMessage)),
-        concatMap((handler: MessageHandlerInterface) => this._wrapWithObservable(handler.handle(message))),
+        map((currentMessage: T) => this._messageHandlerMapper.getHandlers(currentMessage)),
+        concatMap((handlers: ((message: T) => any)[]) => from(handlers)
+          .pipe(
+            flatMap((handler: (message: T) => any) => this._wrapWithObservable(handler(message))),
+            toArray()
+          )
+        ),
         concatMap(
           (result: any) => next(message)
             .pipe(
