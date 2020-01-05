@@ -1256,10 +1256,10 @@ core-js@^2.4.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
   integrity sha512-HOpZf6eXmnl7la+cUdMnLvUxKNqLUzJvgIziQ0DiF3JwSImNphIqdGqzj6hIKyX04MmV0poclQ7+wjWvxQyR2A==
 
-core-js@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.2.1.tgz#cd41f38534da6cc59f7db050fe67307de9868b09"
-  integrity sha512-Qa5XSVefSVPRxy2XfUC13WbvqkxhkwB3ve+pgCQveNgYzbM/UxZeu1dcOX/xr4UmfUd+muuvsaxilQzCyUurMw==
+core-js@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.1.tgz#39d5e2e346258cc01eb7d44345b1c3c014ca3f05"
+  integrity sha512-186WjSik2iTGfDjfdCZAxv2ormxtKgemjC3SI6PL31qOA0j5LhTDVjHChccoc7brwLvpvLPiMyRlcO88C4l1QQ==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -5977,12 +5977,12 @@ ts-node@^8.0.2:
     source-map-support "^0.5.6"
     yn "^3.0.0"
 
-ts-polyfill@^3.3.3:
-  version "3.5.3"
-  resolved "https://registry.yarnpkg.com/ts-polyfill/-/ts-polyfill-3.5.3.tgz#4e58753c357a6243db658955e66b7e249044cd51"
-  integrity sha512-sEMZGBnCnVOkQmK1qBlt/PyHIrdzhl5FKE/SvgSn8GSiZlFBGvMIK+594A3TJ5GHbYIjYK9+V/2ELB3fz99X/A==
+ts-polyfill@^3.7.4:
+  version "3.7.4"
+  resolved "https://registry.yarnpkg.com/ts-polyfill/-/ts-polyfill-3.7.4.tgz#d4f189cc2fb479f33d6a69bc1b61f42b9cb2fb16"
+  integrity sha512-CD8TyF21AGTljAXgfuThsXWAkMnXaiOamOqiKnlV3xM6ZVg4kAPdvQzibJp7i+Unuu4KEl6yhVYw8CMxI9lCcA==
   dependencies:
-    core-js "^3.2.1"
+    core-js "^3.6.1"
 
 tsconfig-paths@^3.8.0:
   version "3.9.0"
