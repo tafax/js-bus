@@ -43,7 +43,7 @@
   "license": "MIT",
   "homepage": "https://github.com/tafax/js-bus",
   "dependencies": {
-    "ts-polyfill": "^3.3.3"
+    "ts-polyfill": "^3.7.4"
   },
   "peerDependencies": {
     "rxjs": "^6.0.0",
