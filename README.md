@@ -1,3 +1,5 @@
+# jsBus is no more maintained. It was moved to [@layer/bus](https://github.com/tafax/layerr).
+
 # jsBus
 [![Build Status](https://travis-ci.org/tafax/js-bus.svg?branch=master)](https://travis-ci.org/tafax/js-bus)
 [![npm version](https://badge.fury.io/js/js-bus.svg)](https://badge.fury.io/js/js-bus)
